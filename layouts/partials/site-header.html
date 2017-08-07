@@ -1,7 +1,11 @@
 <header id="primary" class="row">
+  {{ $splitTitle := (split .Site.Title " ") }}
+  {{ $titleWordLength := (len $splitTitle) }}
+  {{ $indexSecondToLastWord := (sub $titleWordLength 1) }}
+  {{ $headerFirstPart := (delimit (first $indexSecondToLastWord $splitTitle) " ") | lower }}
+  {{ $headerLastPart := (delimit (last 1 $splitTitle) "") | lower }}
   <h1 class="small-12 medium-5 columns">
-    {{ $splitTitle := (split .Site.Title " ") }}
-    <a href="{{ .Site.BaseURL }}">{{ with ($splitTitle | first 1) }}{{ . }}{{ end }}<span class="highlight">{{ $splitTitle }}</span></a>
+    <a href="{{ .Site.BaseURL }}">{{ $headerFirstPart }} <span class="highlight">{{ $headerLastPart }}</span></a>
   </h1>
   {{ partial "site-navigation.html" . }}
 </header>
