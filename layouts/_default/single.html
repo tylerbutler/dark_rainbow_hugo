@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="row">
+  <section id="main" class="twelve columns" role="main">
+    {{ partial "post-content.html" (dict "context" . "is_list_page" false) }}
+  </section>
+</div>
+{{ end}}

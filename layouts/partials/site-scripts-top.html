@@ -1,0 +1,16 @@
+<!-- {# TYPEKIT #} -->
+<!--suppress JSUnresolvedLibraryURL -->
+<script type="text/javascript"
+        src="//use.typekit.net/{{ $.Param "theme.typekit_id" }}.js"></script>
+<script type="text/javascript">
+    try {
+        // noinspection JSUnresolvedVariable
+        Typekit.load();
+    }
+    catch (e) {
+    }
+</script>
+
+{{ if .Params.theme.bigfoot.enabled }}
+    {{ partial "_bigfoot.html" . }}
+{{ end }}

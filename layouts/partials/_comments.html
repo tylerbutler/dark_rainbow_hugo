@@ -1,0 +1,31 @@
+{{ if (eq $.Site.Params.theme.comments.provider "disqus") }}
+  <div id="disqus_thread"></div>
+  <!-- DISQUS -->
+  <script type="text/javascript">
+    var disqus_shortname = '{{ $.Site.Params.theme.comments.account }}';
+    var disqus_identifier = '{{ .URL }}';
+    var disqus_url = '{{ .Permalink }}';
+
+    (function () {
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments
+          powered by Disqus.</a></noscript>
+  <a href="http://disqus.com" class="dsq-brlink">comments powered by <span
+              class="logo-disqus">Disqus</span></a> {{ else if (eq $.Site.Params.theme.comments.provider "intensedebate") }}
+  <!-- INTENSE DEBATE -->
+  <script>
+    var idcomments_acct = '{{ $.Site.Params.theme.comments.account }}';
+    var idcomments_post_id = '{{ .URL }}';
+    var idcomments_post_url = '{{ .Permalink }}';
+
+  </script>
+  <span id="IDCommentsPostTitle" style="display:none;"></span>
+  <script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+{{ end }}

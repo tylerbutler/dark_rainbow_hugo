@@ -1,0 +1,70 @@
+{{ $ := .context }}
+<div class="row">
+  <div class="post-info medium-3 large-2 columns">
+      <div class="post-date">
+          <div class="month">{{ .context.Date.Format "Jan" | upper }}</div>
+          <div class="day">{{ .context.Date.Format "2" }}</div>
+          <div class="year">{{ .context.Date.Format "2006" }}</div>
+          <div class="permalink">
+              <a href="{{ .context.Permalink }}" title="Permanent link to '{{ .context.Title }}'">∞</a>
+          </div>
+      </div>
+      {{ if .context.Params.via }}
+      <div class="attribution">
+          {{ if .context.Params.via_link }} via <a href="{{ .context.Params.via_link }}">{{ .context.Params.via }}</a> {{ else }} via {{ .context.Params.via }} {{ end }}
+      </div>
+      {{ end }}
+      {{ if .context.Params.tags }}
+      <ul class="tags">
+          {{ range .context.Params.tags }}
+          <li>
+            <a href="FIXME">{{ . }}</a>
+          </li>
+          {{ end }}
+      </ul>
+      {{ end }}
+        {{ if .context.Site.Params.theme.sharing.enabled }}
+      <div class="sharing hide-for-small-only">
+          {{ if .context.Site.Params.theme.sharing.twitter.enabled }}
+                {{ partial "_twitter_share.html" . }}
+          {{ end }}
+          {{ if (and .context.Site.Params.theme.sharing.facebook.enabled .context.Site.Params.theme.sharing.facebook.app_id) }}
+                {{ partial "_facebook_share.html" . }}
+          {{ end }}
+      </div>
+      {{ end }}
+  </div>
+
+  <article class="post-content medium-9 large-10 columns">
+    <time datetime="{{ .context.Date.Format "2006-01-02 MST" }}" pubdate=""></time>
+    <header>
+      <h1>
+        {{ $link := (.context.Params.link) }}
+        <a href="{{ if $link }}{{ $link }}{{ else }}{{ .context.URL }}{{ end }}">{{ .context.Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
+      </h1>
+    </header>
+    {{ if (and .context.Truncated .is_list_page) }}
+      {{ .context.Summary }}
+      <div>
+        <a href="{{ .context.URL }}" class="button">Read more →</a>
+      </div>
+    {{ else }}
+      {{ .context.Content }}
+    {{ end }}
+
+    {{ if (not .is_list_page) }}
+      {{ partial "post-paginator.html" $ }}
+
+      {{ if $.Site.Params.theme.comments.enabled }}
+        <section id="comments">
+        {{ if ne $.Site.Params.theme.comments.provider "intensedebate" }}
+          <header>
+            <h1>Comments</h1>
+          </header>
+        {{ end }}
+        {{ partial "_comments.html" $ }}
+      </section>
+      {{ end }}
+    {{ end }}
+  </article>
+</div>

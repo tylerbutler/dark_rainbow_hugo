@@ -1,0 +1,35 @@
+{{ define "main" }}
+
+<!-- {{ printf "%#v" .Section }} -->
+
+<!-- {{ range first 3 (where .Data.Pages "Section" "posts") }}
+    {{ printf "%#v" .Title }}
+{{ end }} -->
+
+<div class="row">
+  {{ partial "site-sidebar.html" . }}
+
+  <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns" role="main">
+    <div class="posts">
+      {{ range first 3 (where .Data.Pages "Section" "posts") }}
+        {{ partial "post-content.html" (dict "context" . "is_list_page" true) }}
+      {{ end }}
+    </div>
+    <div class="row archives">
+      <div class="small-12 columns post-links">
+        <ul class="row">
+          <li class="small-6 medium-4 columns text-left">
+            <a href="FIXME">← older posts</a>
+          </li>
+          <li class="small-6 medium-4 medium-push-4 columns text-right">
+            &nbsp;
+          </li>
+          <li class="small-12 medium-4 medium-pull-4 small-centered columns text-center">
+            <a href="FIXME"> &ndash; archives &ndash; </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+{{ end }}

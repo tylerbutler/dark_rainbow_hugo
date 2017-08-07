@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{{ `<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->` | safeHTML }}
+{{ `<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->` | safeHTML }}
+{{ `<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->` | safeHTML }}
+{{ `<!--[if gt IE 8]><!-->` | safeHTML }}
+<html class="no-js">
+{{ `<!--<![endif]-->` | safeHTML }}
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Facebook meta tags -->
+  <meta property="og:site_name" content="Tyler Butler" />
+
+  <title>{{ block "title" . }}{{ .Site.Title }} {{ with .Title }} | {{ . }}{{ end }}{{ end }}</title>
+
+       {{ if .RSSLink }}
+      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} Atom Feed" />
+      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+      {{ end }}
+
+  <link rel="alternate" type="application/atom+xml" title="Tyler Butler Atom Feed" href="http://feeds.feedburner.com/TylerButlerAllPosts"
+  />
+
+    {{ block "site-stylesheets" . }}
+        <link rel="stylesheet" href="/css/dark_rainbow.css" type="text/css" />
+    {{ end }}
+    {{ block "site-stylesheets-additional" . }}
+        {{ partial "site-stylesheets-additional.html" . }}
+    {{ end }}
+
+    {{ block "site-scripts-top" . }}
+        {{ partial "site-scripts-top.html" . }}
+    {{ end }}
+    {{ block "site-scripts-top-additional" . }}
+        {{ partial "site-scripts-top-additional.html" . }}
+    {{ end }}
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-26061862-1']);
+    _gaq.push(['_setDomainName', 'tylerbutler.com']);
+
+    // track speed for all users; traffic is low enough this shouldn't be a problem
+    _gaq.push(['_setSiteSpeedSampleRate', 100]);
+
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+      var ga = document.createElement('script');
+      ga.type = 'text/javascript';
+      ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +
+        '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  {{ `<!--[if lt IE 9]>` | safeHTML }}
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+  {{ `<![endif]-->` | safeHTML }}
+
+  {{ .Hugo.Generator }}
+</head>
+
+<body class="">
+{{ `<!--[if lt IE 7]>` | safeHTML }}
+    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+{{ `<![endif]-->` | safeHTML }}
+
+  {{ if $.Site.Params.theme.sharing.enabled }}
+      {{ if and $.Site.Params.theme.sharing.facebook.enabled $.Site.Params.theme.sharing.facebook.app_id }}
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {
+                  return;
+              }
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId={{ $.Site.Params.theme.sharing.facebook.app_id }}&version=v2.0";
+              fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+      {{ end }}
+  {{ end }}
+  <div class="container">
+    {{ block "header" . }} {{ partial "site-header.html" . }}{{ end }}
+
+    {{ block "main" . }}{{ end }}
+
+    {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
+    {{ block "scripts" . }}{{ partial "site-scripts.html" . }}{{ end }}
+  </div>
+
+</body>
+
+</html>

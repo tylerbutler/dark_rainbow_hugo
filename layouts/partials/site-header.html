@@ -1,0 +1,7 @@
+<header id="primary" class="row">
+  <h1 class="small-12 medium-5 columns">
+    {{ $splitTitle := (split .Site.Title " ") }}
+    <a href="{{ .Site.BaseURL }}">{{ with ($splitTitle | first 1) }}{{ . }}{{ end }}<span class="highlight">{{ $splitTitle }}</span></a>
+  </h1>
+  {{ partial "site-navigation.html" . }}
+</header>
