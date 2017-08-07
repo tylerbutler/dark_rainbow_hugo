@@ -1,0 +1,26 @@
+{{ define "title" }}
+  {{ .Data.Singular | humanize | title }}: {{ .Title }} : {{ $.Site.Title }}
+{{ end }}
+
+{{ define "subheader" }}
+  <header id="secondary" class="row">
+    <!-- {{ printf "%#v" . }} -->
+    <h1 class="small-12 columns">{{ .Data.Singular | humanize | title }}: {{ .Title }}</h1>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <div class="row">
+    {{ partial "site-sidebar.html" . }}
+
+    <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns" role="main">
+      <ul>
+        <!-- {{ printf "%#v" (index .Data.Pages 0) }} -->
+        {{ $data := .Data }}
+        {{ range .Data.Pages }}
+          <li><a href="{{ .URL }}"> {{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    </section>
+  </div>
+{{ end }}

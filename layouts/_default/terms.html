@@ -1,0 +1,36 @@
+{{ define "title" }}
+  {{ .Title }} : {{ $.Site.Title }}
+{{ end }}
+
+{{ define "subheader" }}
+  <header id="secondary" class="row">
+     <!-- {{ printf "%#v" . }} -->
+    <h1 class="small-12 columns">{{ .Title }}</h1>
+  </header>
+{{ end }}
+
+{{ define "main" }}
+  <div class="row">
+    {{ partial "site-sidebar.html" . }}
+
+    <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns" role="main">
+      <ul>
+        {{ $data := .Data }}
+        <!-- {{ range $key, $val := .Data.Terms }}
+        KEY: {{ $key }}
+        Value: {{ $val }}
+          {{ printf "%#v" . }}
+        {{ end }} -->
+        {{ range $term, $pages := .Data.Terms }}
+          <li><a href="{{ $term }}">{{ $term }}</a>
+          <ul>
+            {{ range $pages }}
+            <li><a href="{{ .URL }}">{{ .Title }}</a></li>
+            {{ end }}
+          </ul>
+          </li>
+        {{ end }}
+    </ul>
+    </section>
+  </div>
+{{ end }}
