@@ -12,8 +12,8 @@
       <section>
         <nav>
           <ul>
-            {{ range $term, $pages := .Data.Terms }}
-              <li><a href="#{{ $term }}">{{ $term }}</a></li>
+            {{ range .Pages.GroupByDate "2006" "desc" }}
+              <li><a href="#{{ .Key }}">{{ .Key }}</a></li>
             {{ end }}
           </ul>
         </nav>
@@ -21,21 +21,15 @@
     </section>
 
     <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
-      {{ range $term, $pages := .Data.Terms }}
-        {{ $count := (len $pages) }}
+      {{ range .Pages.GroupByDate "2006" "desc" }}
         <div class="row">
-          <div class="small-12 medium-4 columns">
-            {{ $url := (delimit (slice $.Site.LanguagePrefix $.Data.Plural ($term | urlize)) "/" ) }}
-            <h2><a href="{{ $url }}" name="{{ $term | urlize }}">{{ $term }}</a></h2>
+          <div class="small-12 medium-2 columns">
+            <h2><a name="{{ .Key }}"></a>{{ .Key }}</h2>
           </div>
-          <div class="small-12 medium-8 columns">
-            {{ range $pages }}
-
-              <!-- {{ $count }}
-              {{ if gt $count 1 }}{{ .Section }}{{ else }}{{ .Section | singularize }}{{ end }} -->
+          <div class="small-12 medium-10 columns">
+            {{ range .Pages.ByDate.Reverse }}
               <article class="row">
                 <div class="medium-2 small-3 columns post-date">
-                  {{ .Date.Format "2006" }}<br/>
                   {{ .Date.Format "02 Jan" }}
                 </div>
                 <div class="medium-10 small-9 columns">
