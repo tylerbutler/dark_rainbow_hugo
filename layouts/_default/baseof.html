@@ -94,7 +94,13 @@
     {{ block "header" . }}{{ partial "site-header.html" . }}{{ end }}
     {{ block "subheader" . }}{{ end }}
 
-    {{ block "main" . }}{{ end }}
+    {{ block "main" . }}
+      <div class="row">
+        {{ partial "_sidebar-date.html" . }}
+
+        {{ partial "_list_content.html" . }}
+      </div>
+    {{ end }}
 
     {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
     {{ block "scripts" . }}{{ partial "site-scripts.html" . }}{{ end }}

@@ -1,0 +1,10 @@
+{{ if $.Site.Menus.sidebarmiddle }}
+<ul>
+  <!-- {{ printf "%#v" $.Site.Menus.sidebar }} -->
+  {{ range $.Site.Menus.sidebarmiddle }}
+    <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+  {{ end }}
+</ul>
+{{ else }}
+  <p class="replace_me">{{ "You need to add a `sidebarmiddle` menu in your site config." | markdownify }}</p>
+{{ end }}

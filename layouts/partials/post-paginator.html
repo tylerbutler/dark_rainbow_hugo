@@ -1,29 +1,14 @@
-
-{{ range where $.Site.Pages.ByDate "Section" .Section }}
-  {{ if gt $.Date.Unix .Date.Unix }}
-    {{ $.Scratch.Set "previous" . }}
-  {{ end }}
-{{ end }}
-
-{{ range where $.Site.Pages.ByDate.Reverse "Section" .Section }}
-  {{ if lt $.Date.Unix .Date.Unix }}
-    {{ $.Scratch.Set "next" . }}
-  {{ end }}
-{{ end }}
-
-<!-- {{ printf "%#v" ($.Scratch.Get "previous") }} -->
-
 <div class="row">
   <div class="small-12 columns post-links">
     <ul class="row">
       <li class="small-12 medium-6 columns text-left">
-        {{ if $.Scratch.Get "previous" }}
-        <a href="{{ ($.Scratch.Get "previous").Permalink }}">← {{ ($.Scratch.Get "previous").Title }}</a>
+        {{ if .PrevInSection }}
+        <a href="{{ .PrevInSection.URL }}">← {{ .PrevInSection.Title }}</a>
         {{ else }} &nbsp; {{ end }}
       </li>
       <li class="small-12 medium-6 columns text-right">
-        {{ if $.Scratch.Get "next" }}
-        <a href="{{ ($.Scratch.Get "next").Permalink }}">{{ ($.Scratch.Get "next").Title }} →</a>
+        {{ if .NextInSection }}
+        <a href="{{ .NextInSection.URL }}">{{ .NextInSection.Title }} →</a>
         {{ else }} &nbsp; {{ end }}
       </li>
     </ul>

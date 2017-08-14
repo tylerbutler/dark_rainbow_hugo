@@ -1,5 +1,5 @@
 {{ define "title" }}
-  {{ .Title }} : {{ $.Site.Title }}
+  {{ .Title }} | {{ $.Site.Title }}
 {{ end }}
 
 {{ define "subheader" }}
@@ -8,12 +8,13 @@
 
 {{ define "main" }}
   <div class="row">
+    <!-- {{ partial "macros/_nav_by_key.html" .Data.Terms }} -->
     <section id="sidebar" class="medium-4 medium-push-8 large-3 large-push-9 columns">
       <section>
         <nav>
           <ul>
-            {{ range $term, $pages := .Data.Terms }}
-              <li><a href="#{{ $term }}">{{ $term }}</a></li>
+            {{ range $key, $value := .Data.Terms }}
+              <li><a href="#{{ $key }}">{{ $key }}</a></li>
             {{ end }}
           </ul>
         </nav>
@@ -30,9 +31,6 @@
           </div>
           <div class="small-12 medium-8 columns">
             {{ range $pages }}
-
-              <!-- {{ $count }}
-              {{ if gt $count 1 }}{{ .Section }}{{ else }}{{ .Section | singularize }}{{ end }} -->
               <article class="row">
                 <div class="medium-2 small-3 columns post-date">
                   {{ .Date.Format "2006" }}<br/>

@@ -1,0 +1,13 @@
+{{ if .Params.showsidebar }}
+<section id="sidebar" class="medium-4 medium-push-8 large-3 large-push-9 columns">
+  <section>
+    <nav>
+      <ul>
+        {{ range .Pages.GroupByDate "2006" "desc" }}
+          <li><a href="#{{ .Key }}">{{ .Key }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </section>
+</section>
+{{ end }}

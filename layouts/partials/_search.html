@@ -1,0 +1,10 @@
+<section id="search">
+  <div>
+    <form action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:http://{{ .Site.BaseURL }}">
+        <input class="search" type="text" name="q" results="0" placeholder="Search...">
+      </fieldset>
+    </form>
+  </div>
+</section>

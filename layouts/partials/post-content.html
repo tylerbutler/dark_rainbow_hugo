@@ -3,7 +3,7 @@
   <div class="post-info medium-3 large-2 columns">
       <div class="post-date">
           <div class="month">{{ .context.Date.Format "Jan" | upper }}</div>
-          <div class="day">{{ .context.Date.Format "2" }}</div>
+          <div class="day">{{ .context.Date.Format "02" }}</div>
           <div class="year">{{ .context.Date.Format "2006" }}</div>
           <div class="permalink">
               <a href="{{ .context.Permalink }}" title="Permanent link to '{{ .context.Title }}'">∞</a>
@@ -17,13 +17,17 @@
       {{ if .context.Params.tags }}
       <ul class="tags">
           {{ range .context.Params.tags }}
-          <li>
-            <a href="FIXME">{{ . }}</a>
-          </li>
+            {{ $tag := . }}
+            <li>
+              {{ with ($.Site.GetPage "taxonomyTerm" "tags" $tag) }}
+                <!-- {{ printf "%#v" . }} -->
+                <a href="{{ .URL }}">{{ .Title }}</a>
+              {{ end }}
+            </li>
           {{ end }}
       </ul>
       {{ end }}
-        {{ if .context.Site.Params.theme.sharing.enabled }}
+        {{ if (and .context.Site.Params.theme.sharing.enabled .is_list_page) }}
       <div class="sharing hide-for-small-only">
           {{ if .context.Site.Params.theme.sharing.twitter.enabled }}
                 {{ partial "_twitter_share.html" . }}

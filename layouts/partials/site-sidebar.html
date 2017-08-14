@@ -1,32 +1,30 @@
+{{ if .Params.showsidebar }}
 <section id="sidebar" class="medium-4 medium-push-8 large-3 large-push-9 columns">
   <section>
     <div>
-      <p class="hide-on-phones">I'm <a href="/about">Tyler Butler</a>: a big man with small dogs.</p>
+      <p class="hide-on-phones">
+        {{ if .Params.sidebartop }}
+          {{ .Params.sidebartop | markdownify }}
+        {{ else }}
+          {{ partial "site-sidebar-top.html" . }}
+        {{ end }}
+      </p>
       <hr class="hide-on-phones" />
       <nav>
-        <ul>
-          <li><a href="http://feeds.feedburner.com/TylerButlerAllPosts">feed</a></li>
-          <li><a href="/archives">archives</a></li>
-          <li><a href="/colophon">colophon</a></li>
-        </ul>
+        {{ if .Params.sidebarmiddle }}
+          {{ .Params.sidebarmiddle | markdownify }}
+        {{ else }}
+          {{ partial "site-sidebar-middle.html" . }}
+        {{ end }}
       </nav>
       <hr class="hide-on-phones" />
-      <h2 class="hide-on-phones">you might remember me from</h2>
-      <ul class="hide-on-phones">
-        <li><a href="http://twitter.com/tylerbutler">twitter</a></li>
-        <li><a href="http://github.com/tylerbutler">github</a></li>
-      </ul>
+      {{ if .Params.sidebarbottom }}
+        {{ .Params.sidebarbottom | markdownify }}
+      {{ else }}
+        {{ partial "site-sidebar-bottom.html" . }}
+      {{ end }}
     </div>
   </section>
-
-  <section id="search">
-    <div>
-      <form action="http://google.com/search" method="get">
-        <fieldset role="search">
-          <input type="hidden" name="q" value="site:http://www.tylerbutler.com">
-          <input class="search" type="text" name="q" results="0" placeholder="Search...">
-        </fieldset>
-      </form>
-    </div>
-  </section>
+  {{ partial "_search.html" . }}
 </section>
+{{ end }}

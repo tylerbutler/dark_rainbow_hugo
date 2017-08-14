@@ -1,0 +1,10 @@
+{{ if $.Site.Menus.sidebarbottom }}
+  <ul class="hide-on-phones">
+    <!-- {{ printf "%#v" $.Site.Menus.sidebar }} -->
+    {{ range $.Site.Menus.sidebarbottom }}
+      <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <p class="replace_me">{{ "You need to add a `sidebarbottom` menu in your site config." | markdownify }}</p>
+{{ end }}
