@@ -17,6 +17,9 @@
           </div>
           <div class="medium-10 small-9 columns">
             <h1><a href="{{ .URL }}">{{ .Title }}</a></h1>
+            {{ if not .Params.nodescription }}
+            {{ with .Description }}<p>{{ markdownify . }}</p>{{ end }}
+            {{ end }}
           </div>
         </article>
       {{ end }}

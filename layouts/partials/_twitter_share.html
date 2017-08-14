@@ -1,5 +1,5 @@
 <div>
-    <a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ .Title }}" {{ with $.Site.params.theme.sharing.twitter.username }} data-via="{{ . }}" data-related="{{ . }}"{{ end }}
+    <a href="https://twitter.com/share" class="twitter-share-button" data-text="{{ .Title }}" {{ with $.Site.Params.theme.sharing.twitter.username }} data-via="{{ . }}" data-related="{{ . }}"{{ end }}
     data-url="{{ .Permalink }}"
     data-count="none"
     data-dnt="true">Tweet</a>
