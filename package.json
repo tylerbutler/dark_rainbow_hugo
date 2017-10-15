@@ -1,0 +1,27 @@
+{
+  "name": "dark_rainbow_hugo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerbutler/dark_rainbow_hugo.git"
+  },
+  "author": "Tyler Butler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tylerbutler/dark_rainbow_hugo/issues"
+  },
+  "homepage": "https://github.com/tylerbutler/dark_rainbow_hugo#readme"
+}
