@@ -1,0 +1,3 @@
+[submodule "shared_assets"]
+	path = shared_assets
+	url = https://github.com/tylerbutler/shared_assets.git
