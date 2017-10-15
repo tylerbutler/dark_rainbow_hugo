@@ -17,16 +17,17 @@
 
   <title>{{ block "title" . }}{{ .Site.Title }} {{ with .Title }} | {{ . }}{{ end }}{{ end }}</title>
 
-       {{ if .RSSLink }}
-      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} Atom Feed" />
-      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+      {{ if .RSSLink }}
+        <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} Atom Feed" />
+        <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
       {{ end }}
 
   <link rel="alternate" type="application/atom+xml" title="Tyler Butler Atom Feed" href="http://feeds.feedburner.com/TylerButlerAllPosts"
   />
 
     {{ block "site-stylesheets" . }}
-        <link rel="stylesheet" href="/css/dark_rainbow.css" type="text/css" />
+      <link rel="stylesheet" href="/css/dark_rainbow.css" type="text/css" />
+      <link rel="stylesheet" href="/css/solarized_dark.css" type="text/css" />
     {{ end }}
     {{ block "site-stylesheets-additional" . }}
         {{ partial "site-stylesheets-additional.html" . }}
