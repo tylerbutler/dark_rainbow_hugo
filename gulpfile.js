@@ -28,14 +28,14 @@ gulp.task('minify-css', ['build-less'], function () {
 		.pipe(cleanCSS({
 			compatibility: 'ie8'
 		}))
-		.pipe(gulp.dest('./static/css/'));
+		.pipe(gulp.dest('./static/static/css/'));
 });
 
 gulp.task('minify-js', ['build-js'], function (cb) {
 	pump([
 			gulp.src('./build/static/js/*.js'),
 			uglify(),
-			gulp.dest('./static/js/')
+			gulp.dest('./static/static/js/')
 		],
 		cb
 	);
