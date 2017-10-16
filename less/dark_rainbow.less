@@ -264,14 +264,16 @@ p > code, em > code, strong > code {
 }
 
 article, div, p {
-    > div.codehilite {
+	> div.codehilite,
+	> div.highlight {
         .code-border();
         .margin-calc(@line-height-default, 0, 1, -1px, -1px);
     }
 }
 
 /* nice scrollbars in webkit */
-pre, code, div.codehilite, table.codehilitetable {
+pre, code, div.codehilite, table.codehilitetable,
+div.highlight {
     ::-webkit-scrollbar {
         height: 10px;
         width: 10px;
@@ -315,7 +317,8 @@ div.linenodiv {
     padding-right: 10px;
 }
 
-div.codehilite, table.codehilitetable {
+div.codehilite, table.codehilitetable,
+div.highlight {
     td {
         padding: 5px;
     }
