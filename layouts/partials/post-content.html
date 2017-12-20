@@ -47,7 +47,7 @@
         <a href="{{ if $link }}{{ $link }}{{ else }}{{ .context.URL }}{{ end }}">{{ .context.Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
       </h1>
     </header>
-    {{ if (and .context.Truncated .is_list_page) }}
+    {{ if (and .context.Params.teaser .context.Truncated .is_list_page) }}
       {{ .context.Summary }}
       <div>
         <a href="{{ .context.URL }}" class="button">Read more →</a>
