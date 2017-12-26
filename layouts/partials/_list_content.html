@@ -1,7 +1,7 @@
-{{ if .Params.showsidebar }}
-<section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
-{{ else }}
+{{ if .Params.hidesidebar }}
 <section id="main" class="twelve columns archives" role="main">
+{{ else }}
+<section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
 {{ end }}
 <!-- <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main"> -->
 {{ range .Pages.GroupByDate "2006" "desc" }}

@@ -1,0 +1,7 @@
+{{ define "title" }}
+  {{ .Title }} | {{ $.Site.Title }}
+{{ end }}
+
+{{ define "subheader" }}
+  {{ partial "macros/_subheader.html" .Title }}
+{{ end }}

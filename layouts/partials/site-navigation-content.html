@@ -1,0 +1,6 @@
+<!-- {{ $currentPage := . }} -->
+{{ if (not .Params.hideintopnav) }}
+<li {{ if (.IsAncestor .) (.Title | lower) }}class="current"{{ end }}>
+  <a href="{{.URL}}">{{ .Title | lower }}</a>
+</li>
+{{ end }}

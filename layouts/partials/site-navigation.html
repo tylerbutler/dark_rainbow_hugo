@@ -1,28 +1,13 @@
-{{ $currentPage := . }}
 <nav class="small-12 medium-7 columns">
-   <ul class="nav navbar-nav">
-    <!-- {{ $section := (where .Site.Sections ".Params.homepagesection" "true")}} -->
-    {{ range (where .Site.Sections ".Params.homepagesection" true)}}
-      <!-- {{ printf "%#v" .Title }} -->
-      {{ $homepagesection := (.Title | lower) }}
-      {{ range (sort $.Site.Menus.main "Weight" "desc") }}
-        <!-- {{ printf "current:%#v" .Identifier }}
-        {{ printf "home:%#v" $homepagesection }} -->
-        {{ $ishomepagesection := (eq $homepagesection .Identifier) }}
-        <li{{if (or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (and $currentPage.IsHome $ishomepagesection))}}
-        class="current"{{end}}>
-        <a href="{{.URL}}">{{ .Name | lower }}</a>
-      </li>
-      {{ end }}
-    {{end}}
-  </ul>
-  <!-- <ul class="nav navbar-nav">
-    {{ printf "%#v" $.Section }}
-    {{ range .Site.Sections }}
-    {{ printf "%#v" .Title }}
-    <li {{ if eq $.Section (.Title | lower) }}class="current"{{ end }}>
-      <a href="{{.URL}}">{{ .Title | lower }}</a>
-    </li>
+  <ul class="nav navbar-nav">
+    <!-- {{ printf "%#v" . }} -->
+    {{ $currentPage := . }}
+    {{ range .Site.Sections.ByWeight }}
+        {{ if (not .Params.hideintopnav) }}
+          <li {{ if (.IsAncestor $currentPage) (.Title | lower) }}class="current"{{ end }}>
+            <a href="{{.URL}}">{{ .Title | lower }}</a>
+          </li>
+        {{ end }}
     {{ end }}
-  </ul> -->
+  </ul>
 </nav>
