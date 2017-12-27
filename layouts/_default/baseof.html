@@ -17,29 +17,26 @@
 
   <title>{{ block "title" . }}{{ if ne .Title .Site.Title }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}{{ end }}</title>
 
-  {{ if .RSSLink }}
-    <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }} Atom Feed" />
-    <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+  {{ block "site-feed" . }}
+    {{ partial "site-feed.html" . }}
   {{ end }}
 
-  <link rel="alternate" type="application/atom+xml" title="Tyler Butler Atom Feed" href="http://feeds.feedburner.com/TylerButlerAllPosts" />
+  {{ block "site-stylesheets" . }}
+    <link rel="stylesheet" href="/static/css/dark_rainbow.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="/css/solarized_dark.css" type="text/css" /> -->
+  {{ end }}
+  {{ block "site-stylesheets-additional" . }}
+      {{ partial "site-stylesheets-additional.html" . }}
+  {{ end }}
 
-    {{ block "site-stylesheets" . }}
-      <link rel="stylesheet" href="/static/css/dark_rainbow.css" type="text/css" />
-      <!-- <link rel="stylesheet" href="/css/solarized_dark.css" type="text/css" /> -->
-    {{ end }}
-    {{ block "site-stylesheets-additional" . }}
-        {{ partial "site-stylesheets-additional.html" . }}
-    {{ end }}
+  {{ block "site-scripts-top" . }}
+      {{ partial "site-scripts-top.html" . }}
+  {{ end }}
+  {{ block "site-scripts-top-additional" . }}
+      {{ partial "site-scripts-top-additional.html" . }}
+  {{ end }}
 
-    {{ block "site-scripts-top" . }}
-        {{ partial "site-scripts-top.html" . }}
-    {{ end }}
-    {{ block "site-scripts-top-additional" . }}
-        {{ partial "site-scripts-top-additional.html" . }}
-    {{ end }}
-
-    {{ template "_internal/google_analytics.html" . }}
+  {{ template "_internal/google_analytics.html" . }}
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
