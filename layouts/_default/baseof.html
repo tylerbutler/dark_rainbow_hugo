@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Facebook meta tags -->
-  <meta property="og:site_name" content="Tyler Butler" />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
 
   <title>{{ block "title" . }}{{ if ne .Title .Site.Title }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}{{ end }}</title>
 
