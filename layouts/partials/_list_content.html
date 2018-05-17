@@ -13,9 +13,7 @@
       {{ range .Pages.ByDate.Reverse }}
         <article class="h-entry row">
           <time class="dt-published" datetime="{{ .Date.Format "2006-01-02 MST" }}" pubdate=""></time>
-          {{ with (default .Site.Author.name .Params.author) }}
-            <div class="p-author" style="display: none">{{ . }}</div>
-          {{ end }}
+          {{ partial "post-author" . }}
           <div class="medium-2 small-3 columns post-date">
             {{ .Date.Format "02 Jan" }}
           </div>
