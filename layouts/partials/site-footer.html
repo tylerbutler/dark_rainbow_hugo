@@ -1,7 +1,7 @@
 <div class="row">
   <footer class="small-12 small-centered columns">
-    <p>&copy; {{ .Site.Title }}. All rights reserved.</p>
-
-    <!-- <p>Powered by <a href="http://www.tylerbutler.com/projects/engineer">engineer</a>.</p> -->
+    {{ with (default .Site.Title .Site.Copyright )}}
+    <p>&copy; {{ . }}. All rights reserved.</p>
+    {{ end }}
   </footer>
 </div>
