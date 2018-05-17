@@ -20,7 +20,7 @@
       </section>
     </section>
 
-    <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
+    <section id="main" class="h-feed medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
       {{ range $term, $pages := .Data.Terms }}
         {{ $count := (len $pages) }}
         <div class="row">
@@ -32,6 +32,9 @@
             {{ range $pages }}
               <article class="h-entry row">
                 <time class="dt-published" datetime="{{ .Date.Format "2006-01-02 MST" }}" pubdate=""></time>
+                {{ with (default .Site.Author.name .Params.author) }}
+                  <div class="p-author" style="display: none">{{ . }}</div>
+                {{ end }}
                 <div class="medium-2 small-3 columns post-date">
                   {{ .Date.Format "2006" }}<br/>
                   {{ .Date.Format "02 Jan" }}

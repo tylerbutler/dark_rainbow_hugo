@@ -1,7 +1,7 @@
 {{ if .Params.hidesidebar }}
-<section id="main" class="twelve columns archives" role="main">
+<section id="main" class="h-feed twelve columns archives" role="main">
 {{ else }}
-<section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
+<section id="main" class="h-feed medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main">
 {{ end }}
 <!-- <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns archives" role="main"> -->
 {{ range .Pages.GroupByDate "2006" "desc" }}
@@ -13,6 +13,9 @@
       {{ range .Pages.ByDate.Reverse }}
         <article class="h-entry row">
           <time class="dt-published" datetime="{{ .Date.Format "2006-01-02 MST" }}" pubdate=""></time>
+          {{ with (default .Site.Author.name .Params.author) }}
+            <div class="p-author" style="display: none">{{ . }}</div>
+          {{ end }}
           <div class="medium-2 small-3 columns post-date">
             {{ .Date.Format "02 Jan" }}
           </div>

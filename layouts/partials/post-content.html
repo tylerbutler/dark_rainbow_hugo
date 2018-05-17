@@ -41,6 +41,9 @@
 
   <article class="post-content medium-9 large-10 columns">
     <time class="dt-published" datetime="{{ .context.Date.Format "2006-01-02 MST" }}" pubdate=""></time>
+    {{ with (default $.Site.Author.name .context.Params.author) }}
+      <div class="p-author" style="display: none">{{ . }}</div>
+    {{ end }}
     <header>
       <h1>
         {{ $link := (.context.Params.link) }}
@@ -53,11 +56,9 @@
         <a href="{{ .context.URL }}" class="button">Read more →</a>
       </div>
     {{ else }}
-    <div>
       <div class="e-content">
         {{ .context.Content }}
       </div>
-    </div>
     {{ end }}
 
     {{ if (not .is_list_page) }}

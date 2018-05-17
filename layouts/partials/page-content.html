@@ -10,6 +10,9 @@
       <!-- Added for h-entry microformat only -->
       <ul style="display: none">
         <li><a class="u-url p-name" href="{{ .URL }}">{{ .Title }}</a></li>
+        {{ with (default .Site.Author.name .Params.author) }}
+          <li class="p-author">{{ . }}</div>
+        {{ end }}
       </ul>
       <div class="e-content">
         {{ .Content }}
