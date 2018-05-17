@@ -1,12 +1,12 @@
 {{ $ := .context }}
-<div class="row">
+<div class="h-entry row">
   <div class="post-info medium-3 large-2 columns">
       <div class="post-date">
           <div class="month">{{ .context.Date.Format "Jan" | upper }}</div>
           <div class="day">{{ .context.Date.Format "02" }}</div>
           <div class="year">{{ .context.Date.Format "2006" }}</div>
           <div class="permalink">
-              <a href="{{ .context.Permalink }}" title="Permanent link to '{{ .context.Title }}'">∞</a>
+              <a class="u-url" href="{{ .context.Permalink }}" title="Permanent link to '{{ .context.Title }}'">∞</a>
           </div>
       </div>
       {{ if .context.Params.via }}
@@ -21,7 +21,7 @@
             <li>
               {{ with ($.Site.GetPage "taxonomyTerm" "tags" $tag) }}
                 <!-- {{ printf "%#v" . }} -->
-                <a href="{{ .URL }}">{{ .Title }}</a>
+                <a class="p-category" href="{{ .URL }}">{{ .Title }}</a>
               {{ end }}
             </li>
           {{ end }}
@@ -40,20 +40,24 @@
   </div>
 
   <article class="post-content medium-9 large-10 columns">
-    <time datetime="{{ .context.Date.Format "2006-01-02 MST" }}" pubdate=""></time>
+    <time class="dt-published" datetime="{{ .context.Date.Format "2006-01-02 MST" }}" pubdate=""></time>
     <header>
       <h1>
         {{ $link := (.context.Params.link) }}
-        <a href="{{ if $link }}{{ $link }}{{ else }}{{ .context.URL }}{{ end }}">{{ .context.Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
+        <a class="p-name" href="{{ if $link }}{{ $link }}{{ else }}{{ .context.URL }}{{ end }}">{{ .context.Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
       </h1>
     </header>
     {{ if (and .context.Params.teaser .context.Truncated .is_list_page) }}
-      {{ .context.Summary }}
-      <div>
+      <div class="p-summary">
+        {{ .context.Summary }}
         <a href="{{ .context.URL }}" class="button">Read more →</a>
       </div>
     {{ else }}
-      {{ .context.Content }}
+    <div>
+      <div class="e-content">
+        {{ .context.Content }}
+      </div>
+    </div>
     {{ end }}
 
     {{ if (not .is_list_page) }}
