@@ -265,8 +265,8 @@ p > code, em > code, strong > code {
 }
 
 article, div, p {
-	> div.codehilite,
-	> div.highlight {
+  > div.codehilite,
+  > div.highlight {
         .code-border();
         .margin-calc(@line-height-default, 0, 1, -1px, -1px);
     }
@@ -433,20 +433,26 @@ input:-ms-input-placeholder {
     }
 
     .sharing {
-        padding-top: 15px;
+        padding-top: 5px;
+        display: -ms-flex;
+        display: -webkit-flex;
+        display: flex;
+
         border-top: 1px dotted @purple;
 
-        div {
-            display: inline;
+        > div {
+          width: 50%;
+          padding: 10px;
+          text-align: center;
 
-            &:not(:last-child) {
-                margin-right: 7px;
-            }
-        }
+          &:first-child {
+            // margin-right: 20px;
+            text-align: right;
+          }
 
-        .fb-share-button {
-            position: relative;
-            top: -7px;
+          &:last-child {
+            text-align: left;
+          }
         }
     }
 
@@ -538,6 +544,7 @@ div.row.archives {
     }
     .link-color(@purple, @orange);
     font-size: 26px;
+    margin-bottom: 5px;
 }
 
 .attribution {
