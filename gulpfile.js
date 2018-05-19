@@ -11,10 +11,6 @@ gulp.task('default', ['build'], function () {
 	// place code for your default task here
 });
 
-// gulp.task('copy-libs', function() {
-// 	return gulp.src('')
-// })
-
 gulp.task('build-less', function () {
 	return gulp.src('./less/*.less')
 		.pipe(less({
@@ -31,12 +27,21 @@ gulp.task('minify-css', ['build-less'], function () {
 		.pipe(gulp.dest('./static/static/css/'));
 });
 
+gulp.task('build-js', function () {
+	return gulp.src([
+		'./shared_assets/lib/jquery/jquery.1.11.0.min.js',
+		'./shared_assets/lib/bigfoot/bigfoot.js'
+	])
+		.pipe(concat('dark_rainbow.js'))
+		.pipe(gulp.dest('./build/static/js/'));
+});
+
 gulp.task('minify-js', ['build-js'], function (cb) {
 	pump([
-			gulp.src('./build/static/js/*.js'),
-			uglify(),
-			gulp.dest('./static/static/js/')
-		],
+		gulp.src('./build/static/js/*.js'),
+		uglify(),
+		gulp.dest('./static/static/js/')
+	],
 		cb
 	);
 });
@@ -47,17 +52,6 @@ gulp.task('build', ['minify-css', 'minify-js'], function () {
 	// 	.pipe(gulp.dest('./static/css/'));
 });
 
-gulp.task('build-js', function () {
-	return gulp.src([
-			'./shared_assets/lib/jquery/jquery.1.11.0.min.js',
-			'./shared_assets/lib/bigfoot/bigfoot.js'
-		])
-		.pipe(concat('dark_rainbow.js'))
-		.pipe(gulp.dest('./build/static/js/'));
+gulp.task('watch', ['build'], function () {
+	gulp.watch(['./less/**/*.less'], ['minify-css']);
 });
-
-// gulp.task('default', function () {
-// 	return gulp.src('assets/**/*.css')
-// 		.pipe(concatCss("styles/bundle.css"))
-// 		.pipe(gulp.dest('out/'));
-// });
