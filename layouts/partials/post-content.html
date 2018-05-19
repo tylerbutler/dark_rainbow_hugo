@@ -28,13 +28,15 @@
       </ul>
       {{ end }}
       {{ if (and .context.Site.Params.theme.sharing.enabled (not .is_list_page)) }}
-        <div class="sharing hide-for-small-only">
-          {{ if .context.Site.Params.theme.sharing.twitter.enabled }}
-            {{ partial "_twitter_share.html" .context }}
-          {{ end }}
-          {{ if (and .context.Site.Params.theme.sharing.facebook.enabled .context.Site.Params.theme.sharing.facebook.app_id) }}
-            {{ partial "_facebook_share_button.html" .context }}
-          {{ end }}
+        <div class="sharing hide-for-small-only row">
+          <div class="medium-up-1">
+            {{ if .context.Site.Params.theme.sharing.twitter.enabled }}
+              {{ partial "_twitter_share.html" .context }}
+            {{ end }}
+            {{ if (and .context.Site.Params.theme.sharing.facebook.enabled .context.Site.Params.theme.sharing.facebook.app_id) }}
+              {{ partial "_facebook_share_button.html" .context }}
+            {{ end }}
+          </div>
         </div>
       {{ end }}
   </div>
