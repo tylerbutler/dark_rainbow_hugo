@@ -22,8 +22,7 @@
   {{ end }}
 
   {{ block "site-stylesheets" . }}
-    <link rel="stylesheet" href="/static/css/dark_rainbow.css" type="text/css" />
-    <!-- <link rel="stylesheet" href="/css/solarized_dark.css" type="text/css" /> -->
+    <link rel="stylesheet" href="/_css/dark_rainbow.min.css" type="text/css" />
   {{ end }}
   {{ block "site-stylesheets-additional" . }}
       {{ partial "site-stylesheets-additional.html" . }}
@@ -38,21 +37,10 @@
 
   {{ template "_internal/google_analytics.html" . }}
 
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  {{ `<!--[if lt IE 9]>` | safeHTML }}
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-  {{ `<![endif]-->` | safeHTML }}
-
-  <!-- {{ .Hugo.Generator }} -->
+  {{ .Hugo.Generator }}
 </head>
 
 <body class="">
-{{ `<!--[if lt IE 7]>` | safeHTML }}
-    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-{{ `<![endif]-->` | safeHTML }}
-
   <div class="container">
     {{ block "header" . }}{{ partial "site-header.html" . }}{{ end }}
     {{ block "subheader" . }}{{ end }}
@@ -66,9 +54,10 @@
     {{ end }}
 
     {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
-    {{ block "scripts" . }}{{ partial "site-scripts.html" . }}{{ end }}
   </div>
 
+  {{ block "site-scripts-bottom" . }}{{ partial "site-scripts-bottom.html" . }}{{ end }}
+  {{ block "site-scripts-bottom-additional" . }}{{ partial "site-scripts-bottom-additional.html" . }}{{ end }}
 </body>
 
 </html>
