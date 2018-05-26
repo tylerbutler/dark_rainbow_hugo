@@ -4341,6 +4341,9 @@ article p:first-child {
   margin-top: 25px;
   margin-bottom: 25px;
 }
+.post-links ul {
+  padding-left: .9375rem;
+}
 .post-links ul.small-block-grid-1 li,
 .post-links ul.medium-block-grid-1 li,
 .post-links ul.large-block-grid-1 li,
