@@ -20,8 +20,8 @@ gulp.task('build', (callback) => {
 	runSequence('clean:static', 'build-less-max', ['build-less', 'copy-libs'], callback);
 });
 
-gulp.task('watch', ['build'], function () {
-	gulp.watch(['./less/**/*.less'], ['minify-css']);
+gulp.task('watch', ['build-less', 'build-less-max'], function () {
+	gulp.watch(['./less/**/*.less'], ['build-less']);
 });
 
 gulp.task('clean:static', function () {
