@@ -4775,6 +4775,7 @@ input:-ms-input-placeholder {
   }
   .sharing {
     padding-top: 5px;
+    border-top: 1px dotted #7750CB;
   }
   .post-content {
     padding-left: 30px;
@@ -4821,6 +4822,56 @@ input:-ms-input-placeholder {
   content: "/";
   padding-left: 9px;
   padding-right: 5px;
+}
+.toc {
+  font-family: myriad-pro;
+  border-top: 1px dotted #7750CB;
+  padding-top: 10px;
+  margin-top: 7px;
+}
+#TableOfContents {
+  font-family: myriad-pro;
+  font-size: 16px;
+  line-height: 25px;
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+#TableOfContents a {
+  text-decoration: none;
+  color: #61A6D0;
+}
+#TableOfContents a:hover {
+  color: #FFC53B;
+  -webkit-transition: all 0.3s ease-out;
+  /* Saf3.2+, Chrome */
+  -moz-transition: all 0.3s ease-out;
+  /* FF4+ */
+  -ms-transition: all 0.3s ease-out;
+  /* IE10? */
+  -o-transition: all 0.3s ease-out;
+  /* Opera 10.5+ */
+  transition: all 0.3s ease-out;
+}
+#TableOfContents h4 {
+  color: #8ABA56;
+}
+#TableOfContents > ul {
+  padding: 0;
+}
+#TableOfContents > ul > li {
+  padding: 0;
+}
+#TableOfContents > ul > li > ul {
+  padding-left: 5px;
+}
+#TableOfContents > ul > li > ul li:before {
+  font-size: 20px;
+  content: "»";
+  padding-right: 6px;
+  margin-left: -5px;
+}
+div.sticky-holder {
+  position: relative;
 }
 footer {
   border-top: 3px dotted #7750CB;
@@ -4935,7 +4986,6 @@ ul.tags {
   list-style: none;
   text-align: left;
   overflow: hidden;
-  border-bottom: 1px dotted #7750CB;
 }
 ul.tags li {
   display: inline-block;

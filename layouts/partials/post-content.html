@@ -1,6 +1,6 @@
 {{ $ := .context }}
 <div class="h-entry row">
-  <div class="post-info medium-3 large-2 columns">
+  <div class="post-info medium-3 large-2 columns sticky-holder">
       <div class="post-date">
           <div class="month">{{ .context.Date.Format "Jan" | upper }}</div>
           <div class="day">{{ .context.Date.Format "02" }}</div>
@@ -28,17 +28,16 @@
       </ul>
       {{ end }}
       {{ if (and .context.Site.Params.theme.sharing.enabled (not .is_list_page)) }}
-        <div class="sharing hide-for-small-only row">
-          <div class="medium-up-1">
+        <div class="sharing hide-for-small-only">
             {{ if in .context.Site.Params.theme.sharing.services "twitter" }}
               {{ partial "_twitter_share_button.html" .context }}
             {{ end }}
             {{ if in .context.Site.Params.theme.sharing.services "facebook" }}
               {{ partial "_facebook_share_button.html" .context }}
             {{ end }}
-          </div>
         </div>
       {{ end }}
+      {{ partial "_toc.html" .context }}
   </div>
 
   <article class="post-content medium-9 large-10 columns">
@@ -63,17 +62,21 @@
 
     {{ if (not .is_list_page) }}
       {{ partial "post-paginator.html" $ }}
-
-      {{ if $.Site.Params.theme.comments.enabled }}
-        <section id="comments">
-        {{ if ne $.Site.Params.theme.comments.provider "intensedebate" }}
-          <header>
-            <h1>Comments</h1>
-          </header>
-        {{ end }}
-        {{ partial "_comments.html" $ }}
-      </section>
-      {{ end }}
     {{ end }}
   </article>
 </div>
+
+{{ if (not .is_list_page) }}
+  {{ if $.Site.Params.theme.comments.enabled }}
+    <div id="comments" class="row">
+      <section class="medium-10 medium-offset-2 columns">
+      {{ if ne $.Site.Params.theme.comments.provider "intensedebate" }}
+        <header>
+          <h1>Comments</h1>
+        </header>
+      {{ end }}
+      {{ partial "_comments.html" $ }}
+      </section>
+    </div>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,6 @@
+{{ if (and .TableOfContents (eq .Type "guide")) }}
+<div class="hide-for-small-only toc ui sticky">
+  <h4>Contents</h4>
+  {{ .TableOfContents }}
+</div>
+{{ end }}
