@@ -3,12 +3,14 @@
   {{ partial "site-sidebar.html" . }}
 
   <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns" role="main">
+      <!-- {{ printf "index.html . %#v" . }} -->
     <div class="h-feed posts">
-      <!-- {{ range first 3 (where .Data.Pages "Section" "posts") }}
-        {{ partial "post-content.html" (dict "context" . "is_list_page" true) }}
-      {{ end }} -->
+      <!-- {{ printf "index renderContext %#v" (.Scratch.Get "renderContext") }} -->
       {{ range .Paginator.Pages }}
-        {{ partial "post-content.html" (dict "context" . "is_list_page" true) }}
+        {{ .Scratch.Set "renderContext" "home" }}
+        {{ .Render "full_view" }}
+        <!-- {{ partial "view_defaults/full_view.html" . }} -->
+        <!-- {{ printf "index inside . %#v" . }} -->
       {{ end }}
     </div>
     <div class="row archives">

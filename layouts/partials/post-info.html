@@ -1,0 +1,41 @@
+{{ $renderContext := .Scratch.Get "renderContext" }}
+
+<div class="post-info medium-3 large-2 columns sticky-holder">
+    <div class="post-date">
+        <div class="month">{{ upper (.Date.Format "Jan") }}</div>
+        <div class="day">{{ .Date.Format "02" }}</div>
+        <div class="year">{{ .Date.Format "2006" }}</div>
+        <div class="permalink">
+            <a class="u-url" href="{{ .Permalink }}" title="Permanent link to '{{ .Title }}'">∞</a>
+        </div>
+    </div>
+    {{ if .Params.via }}
+    <div class="attribution">
+        {{ if .Params.vialink }} via <a href="{{ .Params.vialink }}">{{ .Params.via }}</a> {{ else }} via {{ .Params.via }} {{ end }}
+    </div>
+    {{ end }}
+    {{ if .Params.tags }}
+    <ul class="tags">
+        {{ range .Params.tags }}
+          {{ $tag := . }}
+          <li>
+            {{ with ($.Site.GetPage "taxonomyTerm" "tags" $tag) }}
+              <a class="p-category" href="{{ .URL }}">{{ .Title }}</a>
+            {{ end }}
+          </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+    <!-- {{ printf "post-info renderContext: %#v" $renderContext }} -->
+    {{ if (and .Site.Params.theme.sharing.enabled (eq $renderContext "home")) }}
+      <div class="sharing hide-for-small-only">
+          {{ if in .Site.Params.theme.sharing.services "twitter" }}
+            {{ partial "_twitter_share_button.html" . }}
+          {{ end }}
+          {{ if in .Site.Params.theme.sharing.services "facebook" }}
+            {{ partial "_facebook_share_button.html" . }}
+          {{ end }}
+      </div>
+    {{ end }}
+    {{ partial "_toc.html" . }}
+</div>

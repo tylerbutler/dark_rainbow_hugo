@@ -4782,6 +4782,7 @@ input:-ms-input-placeholder {
   }
 }
 #sidebar section {
+  text-align: center;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -4791,8 +4792,7 @@ input:-ms-input-placeholder {
   line-height: 25px;
   margin-top: 12.5px;
   margin-bottom: 12.5px;
-  text-align: center;
-  padding: .5em;
+  padding: 1em;
   overflow: hidden;
 }
 #sidebar section p {
@@ -4822,6 +4822,55 @@ input:-ms-input-placeholder {
   content: "/";
   padding-left: 9px;
   padding-right: 5px;
+}
+.micropost {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  opacity: 1;
+  background-color: #1e263b;
+  font-size: 18px;
+  line-height: 25px;
+  margin-top: 12.5px;
+  margin-bottom: 12.5px;
+  padding: 1em;
+  overflow: hidden;
+  border-left: 5px #7750CB solid;
+}
+.micropost p {
+  font-size: 18px;
+  line-height: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.micropost p > ul li:before {
+  font-size: 20px;
+  content: "»";
+  padding-right: 11px;
+  margin-left: -10px;
+}
+.micropost .post-date {
+  font-size: 12px;
+  line-height: 25px;
+  margin-top: 12.5px;
+  margin-bottom: 0px;
+  text-align: right;
+}
+.micropost .post-date a {
+  text-decoration: none;
+  color: #61A6D0;
+}
+.micropost .post-date a:hover {
+  color: #FFC53B;
+  -webkit-transition: all 0.3s ease-out;
+  /* Saf3.2+, Chrome */
+  -moz-transition: all 0.3s ease-out;
+  /* FF4+ */
+  -ms-transition: all 0.3s ease-out;
+  /* IE10? */
+  -o-transition: all 0.3s ease-out;
+  /* Opera 10.5+ */
+  transition: all 0.3s ease-out;
 }
 .toc {
   font-family: myriad-pro;

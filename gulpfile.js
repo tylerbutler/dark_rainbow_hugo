@@ -21,7 +21,7 @@ gulp.task('build', (callback) => {
 });
 
 gulp.task('watch', ['build-less', 'build-less-max'], function () {
-	gulp.watch(['./less/**/*.less'], ['build-less']);
+	gulp.watch(['./less/**/*.less'], ['build-less', 'build-less-max']);
 });
 
 gulp.task('clean:static', function () {

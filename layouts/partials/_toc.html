@@ -1,4 +1,7 @@
-{{ if (and .TableOfContents (eq .Type "guide")) }}
+{{ $renderContext := .Scratch.Get "renderContext" }}
+<!-- {{ printf "TOC renderContext %#v" $renderContext }} -->
+
+{{ if (and .TableOfContents (eq .Type "guide") (ne $renderContext "home")) }}
 <div class="hide-for-small-only toc ui sticky">
   <h4>Contents</h4>
   {{ .TableOfContents }}

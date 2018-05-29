@@ -453,21 +453,14 @@ input:-ms-input-placeholder {
 // SIDEBAR
 #sidebar {
     section {
-        .border-radius();
-        background-color: lighten(@bg, 7%);
-        .font-size-default(.5, .5);
         .text-center;
-        padding: .5em;
-        overflow: hidden;
-        p {
-            .font-size-default(0, 0);
-            .bulleted-list();
-        }
-
+        .panel(lighten(@bg, 7%), 1em);
         .horizontal-list(5px, 0);
+
         ul li {
             padding-right: 0;
         }
+
         ul li:not(:last-child) {
             &:after {
                 content: "/";
@@ -475,6 +468,17 @@ input:-ms-input-placeholder {
                 padding-right: 5px;
             }
         }
+    }
+}
+
+.micropost {
+    .panel(lighten(@bg, 7%), 1em);
+    border-left: 5px @purple solid;
+
+    .post-date {
+        .font-size-tiny(.5, 0);
+        .link-color(@blue, @orange);
+        text-align: right;
     }
 }
 

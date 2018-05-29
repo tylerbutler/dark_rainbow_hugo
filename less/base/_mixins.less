@@ -1,4 +1,5 @@
 @import "../../shared_assets/less/_base_mixins.less";
+@import (reference) "_typography.less";
 
 .bulleted-list(@bullet: "»") {
     > ul li:before {
@@ -12,6 +13,19 @@
 .horizontal {
     ul {
         .horizontal-list();
+    }
+}
+
+.panel(@bg-color: black, @padding: .5em) {
+    .border-radius();
+    background-color: @bg-color;
+    .font-size-default(.5, .5);
+    padding: @padding;
+    overflow: hidden;
+
+    p {
+        .font-size-default(0, 0);
+        .bulleted-list();
     }
 }
 

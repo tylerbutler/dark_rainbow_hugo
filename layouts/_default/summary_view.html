@@ -1,0 +1,13 @@
+<article class="h-entry row">
+  <time class="dt-published" datetime="{{ .Date.Format "2006-01-02 MST" }}" pubdate=""></time>
+  {{ partial "post-author" . }}
+  <div class="medium-2 small-3 columns post-date">
+    {{ .Date.Format "02 Jan" }}
+  </div>
+  <div class="medium-10 small-9 columns">
+    {{ .Render "title_view" }}
+    {{ if not .Params.nodescription }}
+    {{ with .Description }}<p class="p-summary">{{ markdownify . }}</p>{{ end }}
+    {{ end }}
+  </div>
+</article>
