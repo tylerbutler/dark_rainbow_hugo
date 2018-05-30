@@ -4198,21 +4198,28 @@ hr {
   clear: both;
   width: 20%;
 }
-blockquote {
+blockquote,
+.micropost {
   padding: 0 10px 0 20px;
   margin-left: 15px;
   border-left: 5px solid #7750CB;
 }
 blockquote p,
-blockquote div {
+.micropost p,
+blockquote div,
+.micropost div {
   font-style: italic;
 }
 blockquote p strong,
-blockquote div strong {
+.micropost p strong,
+blockquote div strong,
+.micropost div strong {
   font-weight: bold;
 }
 blockquote p em,
-blockquote div em {
+.micropost p em,
+blockquote div em,
+.micropost div em {
   font-weight: bold;
   font-style: normal;
 }
@@ -4792,7 +4799,7 @@ input:-ms-input-placeholder {
   line-height: 25px;
   margin-top: 12.5px;
   margin-bottom: 12.5px;
-  padding: 1em;
+  padding: 0.5em;
   overflow: hidden;
 }
 #sidebar section p {
@@ -4824,37 +4831,25 @@ input:-ms-input-placeholder {
   padding-right: 5px;
 }
 .micropost {
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  opacity: 1;
-  background-color: #1e263b;
-  font-size: 18px;
-  line-height: 25px;
-  margin-top: 12.5px;
-  margin-bottom: 12.5px;
-  padding: 1em;
-  overflow: hidden;
-  border-left: 5px #7750CB solid;
-}
-.micropost p {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 25px;
   margin-top: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 25px;
+  padding-left: 11px;
+  margin-left: 0;
 }
-.micropost p > ul li:before {
-  font-size: 20px;
-  content: "»";
-  padding-right: 11px;
-  margin-left: -10px;
+.micropost p {
+  text-align: left;
+}
+.micropost:last-child {
+  margin-bottom: 0;
 }
 .micropost .post-date {
   font-size: 12px;
   line-height: 25px;
   margin-top: 12.5px;
   margin-bottom: 0px;
-  text-align: right;
+  text-align: left;
 }
 .micropost .post-date a {
   text-decoration: none;

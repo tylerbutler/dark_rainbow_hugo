@@ -27,5 +27,12 @@
     </div>
   </section>
   {{ partial "_search.html" . }}
+  <section>
+    <header style="margin-bottom: 10px;">Latest thoughts</header>
+    <hr/>
+    {{ range first 3 (where $.Site.RegularPages "Type" "microposts") }}
+      {{ .Render "sidebar_view" }}
+    {{ end }}
+  </section>
 </section>
 {{ end }}

@@ -78,7 +78,7 @@ hr {
     width: 20%;
 }
 
-blockquote {
+blockquote, .micropost {
     padding: 0 10px 0 20px;
     margin-left: 15px;
     border-left: @border;
@@ -454,7 +454,7 @@ input:-ms-input-placeholder {
 #sidebar {
     section {
         .text-center;
-        .panel(lighten(@bg, 7%), 1em);
+        .panel(lighten(@bg, 7%));
         .horizontal-list(5px, 0);
 
         ul li {
@@ -472,13 +472,21 @@ input:-ms-input-placeholder {
 }
 
 .micropost {
-    .panel(lighten(@bg, 7%), 1em);
-    border-left: 5px @purple solid;
+    // .panel(lighten(@bg, 7%), .5em);
+    // border-left: 5px @purple solid;
+    p { text-align: left; }
+    .font-size-small();
+    padding-left: 11px;
+    margin-left: 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 
     .post-date {
         .font-size-tiny(.5, 0);
         .link-color(@blue, @orange);
-        text-align: right;
+        text-align: left;
     }
 }
 

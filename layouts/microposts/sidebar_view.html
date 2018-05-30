@@ -1,0 +1,8 @@
+<div class="micropost">
+  {{ partial "post-author.html" . }}
+  {{ .Content }}
+  <div class="post-date">
+    <a href="{{ .Permalink }}">- {{ .Date.Format "Jan 2 2006 3:04 PM" }}</a>
+  </div>
+  <!-- {{ printf "renderContext: %#v" (.Scratch.Get "renderContext") }} -->
+</div>
