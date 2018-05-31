@@ -60,6 +60,7 @@ gulp.task('build-less', () => {
 gulp.task('copy-libs', (callback) => {
 	return gulp.src([
 		'./shared_assets/lib/jquery/jquery-2.2.4.min.js',
-		'./shared_assets/lib/bigfoot/bigfoot.min.js'])
+		'./shared_assets/lib/bigfoot/bigfoot.min.js',
+		'./src/jquery.timeago.js'])
 		.pipe(gulp.dest('./static/_js/'));
 });

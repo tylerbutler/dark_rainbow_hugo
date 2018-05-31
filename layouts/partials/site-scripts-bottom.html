@@ -2,11 +2,16 @@
 {{ partial "_jquery.html" . }}
 {{ partial "_bigfoot.html" . }}
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/components/sticky.min.js"></script>
+<script src="/_js/jquery.timeago.js"></script>
 <script type="text/javascript">
-    window.onload = function () {
-      $('.ui.sticky')
-        .sticky({
-          context: '.post-content'
-        });
-    };
-  </script>
+  window.onload = function () {
+    $('.ui.sticky')
+      .sticky({
+        context: '.post-content'
+      });
+  };
+
+  jQuery(document).ready(function() {
+    jQuery("time.timeago").timeago();
+  });
+</script>

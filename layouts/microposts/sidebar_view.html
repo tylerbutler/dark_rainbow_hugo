@@ -2,7 +2,7 @@
   {{ partial "post-author.html" . }}
   {{ .Content }}
   <div class="post-date">
-    <a href="{{ .Permalink }}">- {{ .Date.Format "Jan 2 2006 3:04 PM" }}</a>
+    <a href="{{ .Permalink }}">- <time class="timeago" datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "Jan 2 2006 3:04 PM" }}</time></a>
   </div>
   <!-- {{ printf "renderContext: %#v" (.Scratch.Get "renderContext") }} -->
 </div>
