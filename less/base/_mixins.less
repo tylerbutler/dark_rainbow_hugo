@@ -2,31 +2,32 @@
 @import (reference) "_typography.less";
 
 .bulleted-list(@bullet: "»") {
-    > ul li:before {
-        font-size: @font-size-default + 2;
-        content: @bullet;
-        padding-right: 11px;
-        margin-left: -10px;
-    }
+  > ul li::before {
+    font-size: @font-size-default + 2;
+    content: @bullet;
+    padding-right: 11px;
+    margin-left: -10px;
+  }
 }
 
 .horizontal {
-    ul {
-        .horizontal-list();
-    }
+  ul {
+    .horizontal-list();
+  }
 }
 
-.panel(@bg-color: black, @padding: .5em) {
-    .border-radius();
-    background-color: @bg-color;
-    .font-size-default(.5, .5);
-    padding: @padding;
-    overflow: hidden;
+.panel(@bg-color: black, @padding: 0.5em) {
+  .border-radius();
+  .font-size-default(0.5, 0.5);
 
-    p {
-        .font-size-default(0, 0);
-        .bulleted-list();
-    }
+  background-color: @bg-color;
+  padding: @padding;
+  overflow: hidden;
+
+  p {
+    .font-size-default(0, 0);
+    .bulleted-list();
+  }
 }
 
 // MEDIA QUERY VARIABLES
@@ -38,7 +39,7 @@
 @large-only: ~"screen and (min-width: 64em) and (max-width: 74.9375em)";
 
 .hide-on-phones {
-    @media @small-only {
-        display: none;
-    }
+  @media @small-only {
+    display: none;
+  }
 }
