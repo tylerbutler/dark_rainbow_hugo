@@ -4187,27 +4187,34 @@ hr {
   width: 20%;
 }
 blockquote,
-.micropost {
+.micropost,
+.microblog_post {
   border-left: 5px solid #7750cb;
   margin-left: 15px;
   padding: 0 10px 0 20px;
 }
 blockquote p,
 .micropost p,
+.microblog_post p,
 blockquote div,
-.micropost div {
+.micropost div,
+.microblog_post div {
   font-style: italic;
 }
 blockquote p strong,
 .micropost p strong,
+.microblog_post p strong,
 blockquote div strong,
-.micropost div strong {
+.micropost div strong,
+.microblog_post div strong {
   font-weight: bold;
 }
 blockquote p em,
 .micropost p em,
+.microblog_post p em,
 blockquote div em,
-.micropost div em {
+.micropost div em,
+.microblog_post div em {
   font-style: normal;
   font-weight: bold;
 }
@@ -4818,7 +4825,8 @@ input:-ms-input-placeholder {
   padding-left: 9px;
   padding-right: 5px;
 }
-.micropost {
+.micropost,
+.microblog_post {
   margin-left: 0;
   padding-left: 11px;
   font-size: 16px;
@@ -4826,27 +4834,33 @@ input:-ms-input-placeholder {
   margin-top: 0px;
   margin-bottom: 25px;
 }
-.micropost p {
+.micropost p,
+.microblog_post p {
   text-align: left;
 }
-.micropost header {
+.micropost header,
+.microblog_post header {
   color: #8aba56;
 }
-.micropost:last-child {
+.micropost:last-child,
+.microblog_post:last-child {
   margin-bottom: 0;
 }
-.micropost .post-date {
+.micropost .post-date,
+.microblog_post .post-date {
   text-align: left;
   font-size: 12px;
   line-height: 25px;
   margin-top: 12.5px;
   margin-bottom: 0px;
 }
-.micropost .post-date a {
+.micropost .post-date a,
+.microblog_post .post-date a {
   text-decoration: none;
   color: #61a6d0;
 }
-.micropost .post-date a:hover {
+.micropost .post-date a:hover,
+.microblog_post .post-date a:hover {
   color: #ffc53b;
   -webkit-transition: all 0.3s ease-out;
   /* Saf3.2+, Chrome */

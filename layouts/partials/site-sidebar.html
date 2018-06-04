@@ -1,3 +1,67 @@
+@@ -30,9 +30,10 @@
+  <section>
+    <header style="margin-bottom: 10px;">Latest thoughts</header>
+    <hr/>
+    {{ range first 3 (where $.Site.RegularPages "Type" "microposts") }}
+    <!-- {{ range first 3 (where $.Site.RegularPages "Type" "microposts") }}
+      {{ .Render "sidebar_view" }}
+    {{ end }}
+    {{ end }} -->
+    <script type="text/javascript" src="http://micro.blog/sidebar.js?username=brentsimmons"></script>
+  </section>
+</section>
+{{ end }}
+1 file change in working directory
+View change
+commit:f71a3f
+wip -micro.blog integration
+
+Tyler Butler
+authored6/2/2018 @ 11:44 PM
+parent:2445b3
+5 modified
+Name
+
+Path
+
+Tree
+
+View all files
+layouts/partials
+/site-sidebar.html
+less
+/dark_rainbow.less
+static/_css
+/dark_rainbow.css.map
+static/_css
+/dark_rainbow.max.css
+static/_css
+/dark_rainbow.min.css
+File History: layouts/partials/site-sidebar.html
+wip -micro.blog integration
+18 hours ago by Tyler Butler
+f71a3f
+More tweaks on microposts
+5 days ago by Tyler Butler
+79d6a9
+Micropost support
+5 days ago by Tyler Butler
+4c9218
+Update navigation and section handling
+12/26/2017 by Tyler Butler
+e81474
+Fit and finish on list views etc.
+8/13/2017 by Tyler Butler
+de1721
+Initial theme content
+8/6/2017 by Tyler Butler
+c6cda8
+ADDED layouts/partials/site-sidebar.html
+End of History
+Diff View
+File View
+
+Show blame details
 <!-- {{ printf "site-sidebar . %#v" . }} -->
 {{ if (not .Params.hidesidebar) }}
 <section id="sidebar" class="medium-4 medium-push-8 large-3 large-push-9 columns">
@@ -30,9 +94,10 @@
   <section>
     <header style="margin-bottom: 10px;">Latest thoughts</header>
     <hr/>
-    {{ range first 3 (where $.Site.RegularPages "Type" "microposts") }}
+    <!-- {{ range first 3 (where $.Site.RegularPages "Type" "microposts") }}
       {{ .Render "sidebar_view" }}
-    {{ end }}
+    {{ end }} -->
+    <script type="text/javascript" src="http://micro.blog/sidebar.js?username=brentsimmons"></script>
   </section>
 </section>
 {{ end }}
