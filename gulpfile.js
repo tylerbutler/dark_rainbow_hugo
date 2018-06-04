@@ -1,23 +1,26 @@
+var cleanCSS = require('gulp-clean-css');
+var concat = require('gulp-concat');
+var concatCss = require('gulp-concat-css');
+var declarationSorter = require('css-declaration-sorter');
+var del = require('del');
+var filter = require('gulp-filter');
 var gulp = require('gulp');
 var less = require('gulp-less');
 var path = require('path');
-var cleanCSS = require('gulp-clean-css');
-var concatCss = require('gulp-concat-css');
-var uglify = require('gulp-uglify');
+var postcss = require('gulp-postcss');
+var postless = require('postcss-less');
 var pump = require('pump');
-var concat = require('gulp-concat');
-var del = require('del');
 var rename = require("gulp-rename");
 var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
-var filter = require('gulp-filter');
+var uglify = require('gulp-uglify');
 
 gulp.task('default', ['build'], function () {
 	console.log('Default task complete.')
 });
 
 gulp.task('build', (callback) => {
-	runSequence('clean:static', 'build-less-max', ['build-less', 'copy-libs'], callback);
+	runSequence('clean:static', 'sort-less', 'build-less-max', ['build-less', 'copy-libs'], callback);
 });
 
 gulp.task('watch', ['build-less', 'build-less-max'], function () {
@@ -63,4 +66,14 @@ gulp.task('copy-libs', (callback) => {
 		'./shared_assets/lib/bigfoot/bigfoot.min.js',
 		'./src/jquery.timeago.js'])
 		.pipe(gulp.dest('./static/_js/'));
+});
+
+gulp.task('sort-less', function() {
+	var pugins = [
+		declarationSorter({ order: 'alphabetically' })
+	];
+
+	return gulp.src("./less/*.less")
+	.pipe(postcss(pugins, {syntax: postless}))
+	.pipe(gulp.dest('./less/'));
 });

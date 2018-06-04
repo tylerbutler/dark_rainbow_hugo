@@ -38,13 +38,12 @@ h6 {
 }
 
 body {
-  .font-size-default();
-
   background-color: @bg;
   border-top: @border;
   color: @blue;
   font-family: @font-main;
   margin: 0;
+  .font-size-default();
 }
 
 .container {
@@ -117,14 +116,13 @@ blockquote,
 }
 
 table:not(.codehilitetable) {
-  .border-radius(4px);
-  .margin-calc(@line-height-default, 0, 1, -1px, -1px);
-
+  border: 1px solid @bg-accent;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid @bg-accent;
   max-width: 100%;
   width: 100%;
+  .border-radius(4px);
+  .margin-calc(@line-height-default, 0, 1, -1px, -1px);
 
   th {
     font-weight: bold;
@@ -162,24 +160,21 @@ table:not(.codehilitetable) {
 }
 
 sup {
-  .font-size-tiny();
-
-  vertical-align: baseline;
   position: relative;
   top: -0.99ex;
+  vertical-align: baseline;
+  .font-size-tiny();
 }
 
 dl {
   dt {
-    .font-size-default(0, 0);
-
     font-weight: bold;
+    .font-size-default(0, 0);
   }
 
   dd {
-    .font-size-default();
-
     margin-left: 25px;
+    .font-size-default();
   }
 }
 
@@ -275,11 +270,10 @@ article {
 }
 
 .image {
-  .border-radius(5px);
-
   background-color: @bg-accent;
   padding: 10px 10px 0 10px;
   width: 500px;
+  .border-radius(5px);
 
   &.caption {
     padding: 10px 10px 0 10px;
@@ -292,11 +286,10 @@ article {
 }
 
 .button {
-  .border-radius(2px);
-
   background-color: @bg-accent;
   font-size: 1.5rem;
   padding: 10px;
+  .border-radius(2px);
 
   &:hover {
     background-color: @orange;
@@ -315,18 +308,17 @@ pre {
 em > code,
 p > code,
 strong > code {
-  .font-size-default();
-
   margin: 0;
   white-space: nowrap;
+  .font-size-default();
 }
 
 //noinspection CssOverwrittenProperties
 .code-border {
   border: 1px solid @bg-accent;
   border-left: 10px solid @bg-accent;
-  padding-left: 5px;
   margin: 0 0 0 -15px;
+  padding-left: 5px;
   .font-size-small();
 }
 
@@ -363,19 +355,17 @@ div.highlight {
 
   ::-webkit-scrollbar-thumb:vertical,
   ::-webkit-scrollbar-thumb:horizontal {
-    .border-radius(5px);
-
     background: @blue;
     display: block;
     height: 50px;
+    .border-radius(5px);
   }
 }
 
 table.codehilitetable {
-  .code-border();
-
   table-layout: fixed;
   width: 100%;
+  .code-border();
 
   td.linenos {
     border-right: 1px solid @bg-accent;
@@ -403,6 +393,9 @@ div.highlight {
 
 // TOP HEADER
 header#primary {
+  border-bottom: @border;
+  padding-bottom: 20px;
+
   h1 {
     .font-size-xxl(1, 0);
     .link-color-single(@strong-blue);
@@ -410,12 +403,11 @@ header#primary {
   }
 
   nav {
+    text-align: right;
     .font-size-xl(1, 0);
     .horizontal-list(0, 16px);
     .link-color(@strong-blue, @orange);
     .margin-calc(@line-height-double, 0.9, 0.1, -1px, -5px);
-
-    text-align: right;
 
     ul {
       li.current {
@@ -431,41 +423,33 @@ header#primary {
   span.highlight {
     color: @orange-burnt;
   }
-
-  border-bottom: @border;
-  padding-bottom: 20px;
 }
 
 // SECTION HEADER
 header#secondary {
-  h1 {
-    .font-size-large(0.5, 0.5);
+  border-bottom: 2px dotted @purple;
 
+  h1 {
     color: @green;
+    .font-size-large(0.5, 0.5);
   }
 
   nav {
-    .font-size-medium(1, 1);
-    .horizontal-list(0, 16px);
-
     float: right;
     text-align: right;
+    .font-size-medium(1, 1);
+    .horizontal-list(0, 16px);
   }
-
-  border-bottom: 2px dotted @purple;
 }
 
 // SEARCH
 section#search {
+  text-align: left;
   .margin-calc(@line-height-default, 0.5, 0.5, 0, 0);
   .font-size-default(0, 0);
-
-  text-align: left;
 }
 
 input.search {
-  .border-radius(5px);
-
   background-color: lighten(@bg, 15%);
   border: 1px solid lighten(@bg, 50%);
   color: @blue;
@@ -474,6 +458,7 @@ input.search {
   margin: auto;
   padding: 0.2em 0.3em;
   width: 90%;
+  .border-radius(5px);
 }
 
 input::-webkit-input-placeholder {
@@ -494,12 +479,12 @@ input:-ms-input-placeholder {
     font-family: museo-slab, sans-serif;
 
     .post-date {
-      .font-size-default(1, 0);
       @calendar-border: 1px dotted @purple;
 
       border-bottom: @calendar-border;
       text-align: center;
       text-transform: uppercase;
+      .font-size-default(1, 0);
 
       .day {
         font-family: kulturista-web, museo-sans, deva-ideal, obliqua, sans-serif;
@@ -516,8 +501,8 @@ input:-ms-input-placeholder {
   }
 
   .sharing {
-    padding-top: 5px;
     border-top: 1px dotted @purple;
+    padding-top: 5px;
   }
 
   .post-content {
@@ -547,10 +532,9 @@ input:-ms-input-placeholder {
 }
 
 .micropost {
-  .font-size-small();
-
-  padding-left: 11px;
   margin-left: 0;
+  padding-left: 11px;
+  .font-size-small();
 
   p {
     text-align: left;
@@ -565,10 +549,9 @@ input:-ms-input-placeholder {
   }
 
   .post-date {
+    text-align: left;
     .font-size-tiny(0.5, 0);
     .link-color(@blue, @orange);
-
-    text-align: left;
   }
 }
 
@@ -581,10 +564,9 @@ input:-ms-input-placeholder {
 }
 
 #TableOfContents {
+  font-family: @font-main;
   .font-size-small();
   .link-color(@blue, @orange);
-
-  font-family: @font-main;
 
   h4 {
     //font-family: @font-main;
@@ -601,10 +583,10 @@ input:-ms-input-placeholder {
         padding-left: 5px;
 
         li::before {
-          font-size: @font-size-default + 2;
           content: "»";
-          padding-right: 6px;
+          font-size: @font-size-default + 2;
           margin-left: -5px;
+          padding-right: 6px;
         }
       }
     }
@@ -617,12 +599,11 @@ div.sticky-holder {
 
 // FOOTER
 footer {
-  .font-size-small(0.5, 0.5);
-
   border-top: 3px dotted @purple;
   margin-top: 0.5 * @line-height-default !important;
   padding-top: 0.5 * @line-height-default;
   text-align: center;
+  .font-size-small(0.5, 0.5);
 }
 
 .archives {
@@ -666,10 +647,9 @@ div.row.archives {
 
 // MISCELLANEOUS
 .permalink {
-  .link-color(@purple, @orange);
-
   font-size: 26px;
   margin-bottom: 5px;
+  .link-color(@purple, @orange);
 
   a {
     // Use Verdana here since the infinity symbol looks better
@@ -678,8 +658,6 @@ div.row.archives {
 }
 
 .attribution {
-  .link-color(@purple, @orange);
-
   border-bottom: 1px dotted @purple;
   color: @purple;
   font-family: @font-main;
@@ -687,22 +665,21 @@ div.row.archives {
   line-height: @line-height-default / 2;
   margin-top: @line-height-default / 4;
   padding-bottom: @line-height-default / 4;
+  .link-color(@purple, @orange);
 }
 
 .arrow {
-  .font-size-xl();
-
   color: @bg-accent;
+  .font-size-xl();
 }
 
 ul.tags {
-  .link-color(@light-blue, @orange);
-
   list-style: none;
   margin: 0;
   overflow: hidden;
   padding: 2px 0 5px;
   text-align: left;
+  .link-color(@light-blue, @orange);
 
   li {
     display: inline-block;
@@ -711,9 +688,6 @@ ul.tags {
   }
 
   a {
-    .border-radius(0px 2px 2px 0px);
-    .font-size-tiny();
-
     background: @bg-accent;
     font-family: @font-main;
     margin-left: 20px;
@@ -722,6 +696,8 @@ ul.tags {
     text-decoration: none;
     text-indent: 0;
     text-transform: uppercase;
+    .border-radius(0px 2px 2px 0px);
+    .font-size-tiny();
 
     &::after {
       background: @bg;
@@ -755,9 +731,8 @@ ul.tags {
 
 @media @small-only {
   header#primary {
-    .text-center();
-
     padding-bottom: 0;
+    .text-center();
 
     h1 {
       .font-size-medium(0.5, 0);
@@ -786,11 +761,10 @@ ul.tags {
   }
 
   .post-info {
-    .margin-calc(@line-height-default, 0.5, 0.5, 0px, 0px);
-
-    padding-bottom: @line-height-default * 0.5;
     border-bottom: 1px dotted @purple;
     margin-bottom: 0;
+    padding-bottom: @line-height-default * 0.5;
+    .margin-calc(@line-height-default, 0.5, 0.5, 0px, 0px);
 
     .post-date,
     .post-date div,
