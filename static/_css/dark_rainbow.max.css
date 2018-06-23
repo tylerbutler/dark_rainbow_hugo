@@ -4932,6 +4932,12 @@ footer {
   margin-top: 12.5px !important;
   text-align: center;
 }
+footer p {
+  font-size: 12px;
+  line-height: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
 .archives h2 {
   font-size: 32px;
   line-height: 50px;
