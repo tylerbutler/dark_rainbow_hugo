@@ -4164,6 +4164,18 @@ h5,
 h6 {
   font-family: museo-slab;
 }
+header + div,
+h1 + div,
+h2 + div,
+h3 + div,
+h4 + div,
+h5 + div,
+h6 + div {
+  font-size: 18px;
+  line-height: 25px;
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
 p,
 p + div,
 blockquote {
