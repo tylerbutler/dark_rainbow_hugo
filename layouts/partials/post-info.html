@@ -19,7 +19,7 @@
         {{ range .Params.tags }}
           {{ $tag := . }}
           <li>
-            {{ with ($.Site.GetPage "taxonomyTerm" "tags" $tag) }}
+            {{ with ($.Site.GetPage "/tags" $tag) }}
               <a class="p-category" href="{{ .URL }}">{{ .Title }}</a>
             {{ end }}
           </li>
