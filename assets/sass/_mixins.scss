@@ -1,0 +1,44 @@
+@import "../../shared_assets/sass/base_mixins";
+@import "typography";
+
+@mixin bulleted-list($bullet: "»") {
+  > ul li:before {
+    font-size: $font-size-default + 2;
+    content: $bullet;
+    padding-right: 11px;
+    margin-left: -10px;
+  }
+}
+
+.horizontal {
+  ul {
+    @include horizontal-list();
+  }
+}
+
+@mixin panel($bg-color: black, $padding: 0.5em) {
+  @include border-radius();
+  background-color: $bg-color;
+  @include font-size-default(0.5, 0.5);
+  padding: $padding;
+  overflow: hidden;
+
+  p {
+    @include font-size-default(0, 0);
+    @include bulleted-list();
+  }
+}
+
+// MEDIA QUERY VARIABLES
+$small: "";
+$small-only: "screen and (max-width: 39.9375em)";
+$medium: "screen and (min-width: 40em)";
+$medium-only: "screen and (min-width: 40em) and (max-width: 63.9375em)";
+$large: "screen and (min-width: 64em)";
+$large-only: "screen and (min-width: 64em) and (max-width: 74.9375em)";
+
+.hide-on-phones {
+  @media #{$small-only} {
+    display: none;
+  }
+}
