@@ -18,9 +18,11 @@
     <ul class="tags">
         {{ range .Params.tags }}
           {{ $tag := . }}
-          <li>
-            {{ with ($.Site.GetPage "/tags" $tag) }}
+          <li><!--tag-->
+            {{ with $.Site.GetPage "/tags"}}
+            {{ with .GetPage  $tag }}
               <a class="p-category" href="{{ .URL }}">{{ .Title }}</a>
+            {{ end }}
             {{ end }}
           </li>
         {{ end }}
