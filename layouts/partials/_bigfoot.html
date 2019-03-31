@@ -1,6 +1,6 @@
 <!-- BIGFOOT -->
 {{ $bigfoot := resources.Get "_shared/lib/bigfoot/bigfoot.min.js" | resources.Fingerprint "sha256" }}
-<script type="text/javascript" src="{{ $bigfoot.Permalink }}" integrity="{{ $bigfoot.Data.Integrity }}"></script>
+<script type="text/javascript" src="{{ $bigfoot.RelPermalink }}" integrity="{{ $bigfoot.Data.Integrity }}"></script>
 <script type="text/javascript">
   $.bigfoot({
     deleteOnUnhover: false,

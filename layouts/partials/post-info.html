@@ -6,7 +6,7 @@
         <div class="day">{{ .Date.Format "02" }}</div>
         <div class="year">{{ .Date.Format "2006" }}</div>
         <div class="permalink">
-            <a class="u-url" href="{{ .Permalink }}" title="Permanent link to '{{ .Title }}'">∞</a>
+            <a class="u-url" href="{{ .RelPermalink }}" title="Permanent link to '{{ .Title }}'">∞</a>
         </div>
     </div>
     {{ if .Params.via }}
