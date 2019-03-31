@@ -1,4 +1,4 @@
-@import "../../shared_assets/sass/base_mixins";
+@import "../_shared/sass/base_mixins";
 @import "typography";
 
 @mixin bulleted-list($bullet: "»") {

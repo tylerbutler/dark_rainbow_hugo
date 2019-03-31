@@ -1,10 +1,10 @@
 @import "libs";
-@import "../../shared_assets/sass/baseline";
+@import "../_shared/sass/baseline";
 @import "mixins";
 @import "colors";
 @import "typography";
-@import "../../shared_assets/code_styles/_solarized.scss";
-@import "../../shared_assets/sass/twitter";
+@import "../_shared/code_styles/_solarized.scss";
+@import "../_shared/sass/twitter";
 
 .replace_me {
   background-color: yellow;
