@@ -2,7 +2,9 @@
 <div class="row">
   <!-- {{ printf "Single IsPage: %#v" .IsPage }} -->
   <section id="main" class="twelve columns" role="main">
-    {{ partial "view_defaults/full_view.html" . }}
+    {{/* {{ partial "view_defaults/full_view.html" . }} */}}
+    {{ .Scratch.Set "renderContext" "single" }}
+    {{ .Render "full_view" }}
   </section>
 </div>
 {{ end}}
