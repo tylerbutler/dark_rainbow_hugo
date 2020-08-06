@@ -26,6 +26,8 @@
       {{ end }}
     </div>
   </section>
-  {{ partial "_search.html" . }}
+  {{ if .Params.search }}
+    {{ partial "_search.html" . }}
+  {{ end }}
 </section>
 {{ end }}
