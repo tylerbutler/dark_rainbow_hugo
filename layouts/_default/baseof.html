@@ -24,7 +24,7 @@
   {{ block "site-stylesheets" . }}
     <!--<link rel="stylesheet" href="/_css/dark_rainbow.min.css" type="text/css" />-->
     {{ $options := (dict "targetPath" "dark_rainbow.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "shared_assets")) }}
-    {{ $style := resources.Get "sass/dark_rainbow.scss" | resources.ToCSS $options | resources.Fingerprint "sha256" }}
+    {{ $style := resources.Get "sass/dark_rainbow.scss" | resources.ToCSS $options }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" type="text/css" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/components/sticky.min.css" type="text/css" />
