@@ -10,13 +10,13 @@
     <header>
       <h1>
         {{ $link := (.Params.link) }}
-        <a class="p-name" href="{{ if $link }}{{ $link }}{{ else }}{{ .URL }}{{ end }}">{{ .Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
+        <a class="p-name" href="{{ if $link }}{{ $link }}{{ else }}{{ .RelPermalink }}{{ end }}">{{ .Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
       </h1>
     </header>
     {{ if (and .Params.teaser .Truncated (eq $renderContext "home")) }}
       <div class="p-summary">
         {{ .Summary }}
-        <a href="{{ .URL }}" class="button">Read more →</a>
+        <a href="{{ .Permalink }}" class="button">Read more →</a>
       </div>
     {{ else }}
       <div class="e-content">

@@ -8,7 +8,7 @@
   {{ end }}
     <article class="h-entry">
       <!-- Added for h-entry microformat only -->
-      <a class="u-url p-name" href="{{ .URL }}" style="display: none">{{ .Title }}</a>
+      <a class="u-url p-name" href="{{ .Permalink }}" style="display: none">{{ .Title }}</a>
       {{ partial "post-author" . }}
       <div class="e-content">
         {{ .Content }}

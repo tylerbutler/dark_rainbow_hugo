@@ -21,7 +21,7 @@
           <li><!--tag-->
             {{ with $.Site.GetPage "/tags"}}
             {{ with .GetPage  $tag }}
-              <a class="p-category" href="{{ .URL }}">{{ .Title }}</a>
+              <a class="p-category" href="{{ .RelPermalink }}">{{ .Title }}</a>
             {{ end }}
             {{ end }}
           </li>

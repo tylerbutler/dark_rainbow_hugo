@@ -4,8 +4,8 @@
     {{ $currentPage := . }}
     {{ range .Site.Sections.ByWeight }}
         {{ if (not .Params.hideintopnav) }}
-          <li {{ if (.IsAncestor $currentPage) (.Title | lower) }}class="current"{{ end }}>
-            <a href="{{.URL}}">{{ .Title | lower }}</a>
+          <li {{ if (.IsAncestor $currentPage) }}class="current"{{ end }}>
+            <a href="{{.Permalink}}">{{ .Title | lower }}</a>
           </li>
         {{ end }}
     {{ end }}
