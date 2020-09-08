@@ -12,20 +12,8 @@ var runSequence = require('run-sequence');
 var sourcemaps = require('gulp-sourcemaps');
 var filter = require('gulp-filter');
 
-gulp.task('default', ['build'], function () {
-	console.log('Default task complete.')
-});
-
-gulp.task('build', (callback) => {
-	runSequence('clean:static', 'build-less-max', ['build-less', 'copy-libs'], callback);
-});
-
-gulp.task('watch', ['build-less', 'build-less-max'], function () {
-	gulp.watch(['./less/**/*.less'], ['build-less', 'build-less-max']);
-});
-
 gulp.task('clean:static', function () {
-	return del.sync('static');
+	return del('static');
 })
 
 // Converts LESS files to CSS without minifying them
@@ -59,7 +47,22 @@ gulp.task('build-less', () => {
 // Copies lib files to output directory
 gulp.task('copy-libs', (callback) => {
 	return gulp.src([
-		'./shared_assets/lib/jquery/jquery-2.2.4.min.js',
-		'./shared_assets/lib/bigfoot/bigfoot.min.js'])
+		'./assets/_shared/lib/jquery/jquery-2.2.4.min.js',
+		'./assets/_shared/lib/bigfoot/bigfoot.min.js'])
 		.pipe(gulp.dest('./static/_js/'));
 });
+
+gulp.task('watch', gulp.series('build-less', 'build-less-max', function () {
+	gulp.watch('./less/**/*.less', gulp.series('build-less', 'build-less-max'));
+}));
+
+gulp.task('build',
+	gulp.series('clean:static',
+		'build-less-max',
+		gulp.parallel('build-less', 'copy-libs')
+	)
+);
+
+gulp.task('default', gulp.series('build', function (done) {
+	done();
+}));
