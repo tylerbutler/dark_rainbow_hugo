@@ -1,7 +1,7 @@
-{{ if (or .Params.author (not $.Site.Author.website)) }}
-  {{ with (default $.Site.Author.name .Params.author) }}
+{{ if (or .Params.author (not .Site.Params.Author.website)) }}
+  {{ with (default .Site.Params.Author.name .Params.author) }}
     <div class="p-author" style="display: none">{{ . }}</div>
   {{ end }}
 {{ else }}
-  <a class="p-author h-card" href="{{ $.Site.Author.website }}" style="display: none">{{ $.Site.Author.name }}</a>
+  <a class="p-author h-card" href="{{ .Site.Params.Author.website }}" style="display: none">{{ .Site.Params.Author.name }}</a>
 {{ end }}
