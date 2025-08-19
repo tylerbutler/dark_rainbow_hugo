@@ -1,0 +1,114 @@
+<!-- SIMPLE MODERN SCRIPTS - Minimal jQuery replacements -->
+<!-- Pure CSS + minimal JavaScript for essential functionality -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Essential modern enhancements with minimal JavaScript
+    initEssentialFeatures();
+  });
+  
+  function initEssentialFeatures() {
+    // 1. Smooth scrolling for anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // 2. Enhanced keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+      }
+    });
+    
+    document.addEventListener('mousedown', function() {
+      document.body.classList.remove('keyboard-navigation');
+    });
+    
+    // 3. Responsive table wrapper (for tables without wrapper)
+    const tables = document.querySelectorAll('table:not(.codehilitetable)');
+    tables.forEach(table => {
+      if (!table.parentNode.classList.contains('table-wrapper')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
+  }
+</script>
+
+<!-- Essential Modern CSS -->
+<style>
+  /* Sticky positioning - Pure CSS, replaces Semantic UI sticky */
+  .modern-sticky,
+  .ui.sticky {
+    position: sticky !important;
+    top: var(--space-md) !important;
+    z-index: var(--z-sticky) !important;
+  }
+  
+  /* Enhanced table wrapper for responsiveness */
+  .table-wrapper {
+    overflow-x: auto;
+    margin-block: var(--space-lg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-bg-accent);
+    
+    /* Modern scrollbars */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue) var(--color-bg-accent);
+    
+    &::-webkit-scrollbar {
+      height: 8px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--color-bg-accent);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-blue);
+      border-radius: var(--border-radius-sm);
+    }
+  }
+  
+  /* Keyboard navigation enhancements */
+  .keyboard-navigation :focus-visible {
+    outline: 2px solid var(--color-orange) !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Smooth transitions for interactive elements */
+  .modern-layout a,
+  .modern-layout button,
+  .modern-layout input,
+  .modern-layout textarea {
+    transition: all 0.2s ease;
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .modern-layout a,
+    .modern-layout button,
+    .modern-layout input,
+    .modern-layout textarea {
+      transition: none !important;
+    }
+    
+    html {
+      scroll-behavior: auto !important;
+    }
+  }
+</style>

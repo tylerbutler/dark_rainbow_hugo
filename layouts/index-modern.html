@@ -1,0 +1,66 @@
+{{ define "main" }}
+<div class="posts h-feed">
+  {{ range .Paginator.Pages }}
+    {{ .Scratch.Set "renderContext" "home" }}
+    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+      <header>
+        <h1 class="p-name" itemprop="headline">
+          <a href="{{ .RelPermalink }}" class="u-url" itemprop="url">{{ .Title }}</a>
+        </h1>
+        
+        <div class="post-meta">
+          <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">
+            {{ .Date.Format "January 2, 2006" }}
+          </time>
+          
+          {{ with .Params.tags }}
+          <ul class="tags p-category" itemprop="keywords">
+            {{ range . }}
+            <li><a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">#{{ . }}</a></li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </div>
+      </header>
+      
+      <div class="post-content e-content" itemprop="articleBody">
+        {{ if .Summary }}
+          {{ .Summary }}
+          {{ if .Truncated }}
+            <p><a href="{{ .RelPermalink }}" class="read-more">Read more →</a></p>
+          {{ end }}
+        {{ else }}
+          {{ .Content }}
+        {{ end }}
+      </div>
+    </article>
+  {{ end }}
+  
+  <!-- Pagination -->
+  {{ if or .Paginator.HasPrev .Paginator.HasNext }}
+  <nav class="pagination" aria-label="Blog post pagination">
+    <ul class="pagination-list">
+      <li class="pagination-prev">
+        {{ if .Paginator.HasPrev }}
+          <a href="{{ .Paginator.Prev.URL }}" rel="prev">← Newer posts</a>
+        {{ else }}
+          <span class="disabled">← Newer posts</span>
+        {{ end }}
+      </li>
+      
+      <li class="pagination-info">
+        Page {{ .Paginator.PageNumber }} of {{ .Paginator.TotalPages }}
+      </li>
+      
+      <li class="pagination-next">
+        {{ if .Paginator.HasNext }}
+          <a href="{{ .Paginator.Next.URL }}" rel="next">Older posts →</a>
+        {{ else }}
+          <span class="disabled">Older posts →</span>
+        {{ end }}
+      </li>
+    </ul>
+  </nav>
+  {{ end }}
+</div>
+{{ end }}

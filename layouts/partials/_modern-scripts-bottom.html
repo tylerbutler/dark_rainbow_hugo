@@ -1,0 +1,190 @@
+<!-- MODERN SCRIPTS - jQuery and CDN-free implementation -->
+<!-- Replaces site-scripts-bottom.html for modern layout -->
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // CSS position:sticky handles stickiness natively - no JavaScript needed!
+    // Just apply the .modern-sticky class in CSS
+    
+    // Initialize other modern features  
+    initModernInteractions();
+  });
+  
+  /**
+   * Modern interaction enhancements
+   * Replaces jQuery-based interactions
+   */
+  function initModernInteractions() {
+    // Smooth scroll for anchor links (already implemented in baseof-modern.html)
+    
+    // Enhanced focus management
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+      }
+    });
+    
+    document.addEventListener('mousedown', function() {
+      document.body.classList.remove('keyboard-navigation');
+    });
+    
+    // Improved table responsiveness
+    const tables = document.querySelectorAll('table:not(.codehilitetable)');
+    tables.forEach(table => {
+      if (!table.parentNode.classList.contains('table-wrapper')) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
+    
+    // Enhanced image loading
+    const images = document.querySelectorAll('img[data-src]');
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            imageObserver.unobserve(img);
+          }
+        });
+      });
+      
+      images.forEach(img => imageObserver.observe(img));
+    }
+  }
+  
+  /**
+   * Utility functions for modern JavaScript
+   */
+  
+  // Modern element selector (replaces jQuery $())
+  function $(selector, context = document) {
+    return context.querySelectorAll(selector);
+  }
+  
+  // Event delegation helper
+  function on(eventType, selector, handler) {
+    document.addEventListener(eventType, function(e) {
+      if (e.target.matches(selector) || e.target.closest(selector)) {
+        handler.call(e.target.closest(selector) || e.target, e);
+      }
+    });
+  }
+  
+  // Animation helpers
+  function fadeIn(element, duration = 300) {
+    element.style.opacity = '0';
+    element.style.display = 'block';
+    
+    const start = performance.now();
+    
+    function animate(timestamp) {
+      const elapsed = timestamp - start;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      element.style.opacity = progress.toString();
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+    
+    requestAnimationFrame(animate);
+  }
+  
+  function fadeOut(element, duration = 300) {
+    const start = performance.now();
+    const initialOpacity = parseFloat(getComputedStyle(element).opacity);
+    
+    function animate(timestamp) {
+      const elapsed = timestamp - start;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      element.style.opacity = (initialOpacity * (1 - progress)).toString();
+      
+      if (progress >= 1) {
+        element.style.display = 'none';
+      } else {
+        requestAnimationFrame(animate);
+      }
+    }
+    
+    requestAnimationFrame(animate);
+  }
+  
+  // Expose utilities globally for compatibility
+  window.modernUtils = {
+    $,
+    on,
+    fadeIn,
+    fadeOut,
+    initModernSticky,
+    initModernInteractions
+  };
+</script>
+
+<!-- Modern CSS for sticky and interactive elements -->
+<style>
+  /* Modern sticky styles - Pure CSS, no JavaScript needed */
+  .modern-sticky,
+  .ui.sticky {
+    position: sticky !important;
+    top: var(--space-md) !important;
+    z-index: var(--z-sticky) !important;
+  }
+  
+  /* Enhanced table wrapper for responsiveness */
+  .table-wrapper {
+    overflow-x: auto;
+    margin-block: var(--space-lg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-bg-accent);
+  }
+  
+  /* Keyboard navigation enhancements */
+  .keyboard-navigation :focus {
+    outline: 2px solid var(--color-orange) !important;
+    outline-offset: 2px !important;
+  }
+  
+  /* Lazy loading image styles */
+  img.lazy {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  img:not(.lazy) {
+    opacity: 1;
+  }
+  
+  /* Smooth transitions for interactive elements */
+  .modern-layout a,
+  .modern-layout button,
+  .modern-layout input,
+  .modern-layout textarea {
+    transition: all 0.2s ease;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .modern-sticky.is-pinned {
+      border: 2px solid var(--color-blue) !important;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .modern-sticky,
+    .modern-layout a,
+    .modern-layout button,
+    .modern-layout input,
+    .modern-layout textarea,
+    img {
+      transition: none !important;
+    }
+  }
+</style>

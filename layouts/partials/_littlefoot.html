@@ -1,0 +1,73 @@
+<!-- LITTLEFOOT - Modern jQuery-free footnotes -->
+<!-- Replacement for Bigfoot.js with same functionality -->
+
+<!-- Littlefoot CSS -->
+<link rel="stylesheet" href="https://unpkg.com/littlefoot@4.1.2/dist/littlefoot.css">
+
+<!-- Littlefoot JavaScript -->
+<script src="https://unpkg.com/littlefoot@4.1.2/dist/littlefoot.js"></script>
+
+<!-- Initialize with same config as Bigfoot.js -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    littlefoot.littlefoot({
+      // Match Bigfoot.js configuration
+      deleteOnUnhover: false,
+      preventPageScroll: false,
+      hoverDelay: 250,
+      allowMultiple: false, // equivalent to numberResetSelector behavior
+      anchorPattern: /(fn|footnote|note)[:\-_\d]/gi,
+      anchorParentSelector: 'sup',
+      
+      // Modern enhancements
+      activateOnHover: true,
+      allowDuplicates: false,
+      dismissOnUnhover: false,
+      
+      // Accessibility improvements
+      scope: 'body',
+      contentTemplate: `
+        <aside class="littlefoot__footnote" id="fncontent:<% id %>">
+          <div class="littlefoot__wrapper">
+            <div class="littlefoot__content">
+              <% content %>
+            </div>
+          </div>
+          <div class="littlefoot__tooltip"></div>
+        </aside>
+      `
+    });
+  });
+</script>
+
+<!-- Custom styling to match site theme -->
+<style>
+  /* Override Littlefoot styles to match site theme */
+  .littlefoot__button {
+    background-color: {{ $.Site.Params.colors.orange | default "#ffc53b" }};
+    color: {{ $.Site.Params.colors.bg | default "#121723" }};
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .littlefoot__button:hover,
+  .littlefoot__button--active {
+    background-color: {{ $.Site.Params.colors.orange_burnt | default "#d24727" }};
+    transform: scale(1.1);
+  }
+  
+  .littlefoot__footnote {
+    background-color: {{ $.Site.Params.colors.bg_accent | default "#343f50" }};
+    border: 1px solid {{ $.Site.Params.colors.purple | default "#7750cb" }};
+    color: {{ $.Site.Params.colors.blue | default "#61a6d0" }};
+    font-family: {{ $.Site.Params.fonts.main | default "myriad-pro" }};
+  }
+  
+  .littlefoot__content a {
+    color: {{ $.Site.Params.colors.green | default "#8aba56" }};
+  }
+  
+  .littlefoot__content a:hover {
+    color: {{ $.Site.Params.colors.orange | default "#ffc53b" }};
+  }
+</style>

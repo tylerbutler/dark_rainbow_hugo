@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Color scheme support -->
+  <meta name="color-scheme" content="dark light">
+  
+  <!-- Facebook meta tags -->
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+
+  <title>{{ block "title" . }}{{ if ne .Title .Site.Title }}{{ with .Title }}{{ . }} | {{ end }}{{ end }}{{ .Site.Title }}{{ end }}</title>
+
+  {{ block "site-feed" . }}
+    {{ partial "site-feed.html" . }}
+  {{ end }}
+
+  {{ block "site-stylesheets" . }}
+    <!-- Modern CSS with feature detection (no CDN dependencies) -->
+    {{ $modernOptions := (dict "targetPath" "dark_rainbow_modern.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "shared_assets")) }}
+    {{ $modernStyle := resources.Get "sass/dark_rainbow_modern.scss" | css.Sass $modernOptions | resources.Fingerprint "sha256" }}
+    <link rel="stylesheet" href="{{ $modernStyle.RelPermalink }}" type="text/css" />
+    
+    <!-- Fallback to original CSS for browsers without grid support -->
+    {{ $fallbackOptions := (dict "targetPath" "dark_rainbow_fallback.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "shared_assets")) }}
+    {{ $fallbackStyle := resources.Get "sass/dark_rainbow.scss" | css.Sass $fallbackOptions | resources.Fingerprint "sha256" }}
+    <noscript>
+      <link rel="stylesheet" href="{{ $fallbackStyle.RelPermalink }}" type="text/css" />
+    </noscript>
+  {{ end }}
+  
+  {{ block "site-stylesheets-additional" . }}
+      {{ partial "site-stylesheets-additional.html" . }}
+  {{ end }}
+
+  {{ block "site-scripts-top" . }}
+      {{ partial "site-scripts-top.html" . }}
+  {{ end }}
+  {{ block "site-scripts-top-additional" . }}
+      {{ partial "site-scripts-top-additional.html" . }}
+  {{ end }}
+
+  {{ template "_internal/google_analytics.html" . }}
+  {{ hugo.Generator }}
+</head>
+
+<body class="modern-layout">
+  <!-- Layout toggle button for testing -->
+  <button class="modern-layout-toggle" onclick="toggleLayout()" aria-label="Toggle between modern and classic layout">
+    🔄 Toggle Layout
+  </button>
+
+  <div class="container">
+    {{ block "header" . }}
+      <header id="primary" role="banner">
+        <h1>
+          <a href="{{ "/" | relURL }}" rel="home">
+            {{ .Site.Title }}
+            {{ with .Site.Params.subtitle }}<span class="highlight">{{ . }}</span>{{ end }}
+          </a>
+        </h1>
+        
+        <nav role="navigation" aria-label="Main navigation">
+          <ul>
+            {{ range .Site.Menus.main }}
+              <li{{ if .HasChildren }} class="dropdown"{{ end }}>
+                <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="current" aria-current="page"{{ end }}>
+                  {{ .Name }}
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </header>
+    {{ end }}
+    
+    {{ block "subheader" . }}{{ end }}
+
+    <!-- Sidebar -->
+    {{ if .Site.Params.sidebar }}
+    <aside id="sidebar" role="complementary">
+      {{ block "sidebar" . }}
+        {{ partial "site-sidebar.html" . }}
+      {{ end }}
+    </aside>
+    {{ end }}
+
+    <!-- Main content -->
+    <section id="main" role="main">
+      {{ block "main" . }}
+        <div class="content">
+          {{ .Content }}
+        </div>
+      {{ end }}
+    </section>
+
+    <!-- Footer -->
+    {{ block "footer" . }}
+      <footer role="contentinfo">
+        {{ partial "site-footer.html" . }}
+      </footer>
+    {{ end }}
+  </div>
+
+  <!-- Modern JavaScript (no jQuery dependency) -->
+  <script>
+    // Layout toggle functionality for testing
+    function toggleLayout() {
+      document.body.classList.toggle('modern-layout');
+      document.body.classList.toggle('classic-layout');
+    }
+    
+    // Feature detection for CSS Grid
+    if (CSS.supports('display', 'grid')) {
+      document.documentElement.classList.add('supports-grid');
+      document.documentElement.classList.remove('no-grid');
+    } else {
+      document.documentElement.classList.add('no-grid');
+      document.documentElement.classList.remove('supports-grid');
+      
+      // For browsers without grid support, use the original CSS
+      // (The noscript fallback CSS will be used instead)
+      document.body.classList.remove('modern-layout');
+      document.body.classList.add('classic-layout');
+    }
+    
+    // Smooth scrolling for anchor links
+    document.addEventListener('DOMContentLoaded', function() {
+      const links = document.querySelectorAll('a[href^="#"]');
+      
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          const target = document.querySelector(targetId);
+          
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+    
+    // Modern footnotes handled by Littlefoot.js (see _modern-footnotes.html partial)
+  </script>
+
+  <!-- Modern footnotes with Littlefoot.js -->
+  {{ partial "_modern-footnotes.html" . }}
+
+  <!-- Simple modern scripts (no jQuery/CDN dependencies) -->
+  {{ partial "_simple-modern-scripts.html" . }}
+
+  <!-- Fallback for custom scripts if needed -->
+  {{ block "site-scripts-bottom-additional" . }}{{ end }}
+</body>
+</html>

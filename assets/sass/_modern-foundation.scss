@@ -1,0 +1,180 @@
+///////////////////////////////////
+// MODERN CSS FOUNDATION           //
+// CSS Custom Properties & Layouts //
+///////////////////////////////////
+
+:root {
+  // Color System - Modern CSS Custom Properties
+  --color-bg: #121723;
+  --color-bg-accent: #343f50;
+  --color-offwhite: #fdfdfd;
+  --color-blue: #61a6d0;
+  --color-navy: #1f4476;
+  --color-orange: #ffc53b;
+  --color-orange-dark: #fc951e;
+  --color-orange-burnt: #d24727;
+  --color-light: #6e8097;
+  --color-purple: #7750cb;
+  --color-purple-light: #c48dff;
+  --color-light-blue: #c4c8ff;
+  --color-main-blue: #3973a8;
+  --color-bright-blue: #3ab3fe;
+  --color-strong-blue: #007cef;
+  --color-blue2: #479cd1;
+  --color-blue3: #2d3e5d;
+  --color-graphite: #434950;
+  --color-pink: #ea4c89;
+  --color-pink-bright: #fa2573;
+  --color-green: #8aba56;
+  --color-lime: #a6e32d;
+  --color-red: #e52222;
+  --color-red-bright: #c00;
+  --color-teal: #67d9f0;
+  --color-grey: #586e75;
+
+  // Typography System - Modern Fluid Scaling
+  --font-family-main: myriad-pro, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-heading: museo-slab, Georgia, serif;
+  --font-family-mono: ubuntu-mono, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  
+  // Fluid Typography using clamp()
+  --font-size-tiny: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);     // 12-14px
+  --font-size-small: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);      // 14-16px  
+  --font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);         // 16-18px
+  --font-size-medium: clamp(1.25rem, 1.1rem + 0.75vw, 1.4375rem);  // 20-23px
+  --font-size-large: clamp(1.5rem, 1.3rem + 1vw, 2rem);            // 24-32px
+  --font-size-xl: clamp(1.875rem, 1.6rem + 1.375vw, 2.25rem);      // 30-36px
+  --font-size-xxl: clamp(2.25rem, 1.9rem + 1.75vw, 2.8125rem);     // 36-45px
+
+  // Line Heights - Unitless for better scaling
+  --line-height-tight: 1.2;
+  --line-height-base: 1.4;
+  --line-height-relaxed: 1.6;
+  --line-height-loose: 1.8;
+
+  // Spacing System - Consistent scale
+  --space-xs: 0.25rem;    // 4px
+  --space-sm: 0.5rem;     // 8px
+  --space-md: 1rem;       // 16px
+  --space-lg: 1.5rem;     // 24px
+  --space-xl: 2rem;       // 32px
+  --space-2xl: 3rem;      // 48px
+  --space-3xl: 4rem;      // 64px
+
+  // Layout System
+  --content-max-width: 1000px;
+  --sidebar-width: 250px;
+  --border-width: 5px;
+  --border-radius-sm: 2px;
+  --border-radius-md: 5px;
+  --border-radius-lg: 10px;
+
+  // Z-Index Scale
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-tooltip: 1050;
+
+  // Breakpoints for container queries
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+// Modern Layout Utilities
+.container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+  
+  @media (width >= 768px) {
+    padding-inline: var(--space-lg);
+  }
+}
+
+// CSS Grid Layout System
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  
+  &--main {
+    grid-template-columns: 1fr;
+    
+    @media (width >= 768px) {
+      grid-template-columns: var(--sidebar-width) 1fr;
+      gap: var(--space-xl);
+    }
+  }
+  
+  &--sidebar-right {
+    grid-template-columns: 1fr;
+    
+    @media (width >= 768px) {
+      grid-template-columns: 1fr var(--sidebar-width);
+    }
+  }
+  
+  &--equal {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+// Flexbox Utilities
+.flex {
+  display: flex;
+  gap: var(--space-md);
+  
+  &--column {
+    flex-direction: column;
+  }
+  
+  &--wrap {
+    flex-wrap: wrap;
+  }
+  
+  &--center {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  &--between {
+    justify-content: space-between;
+  }
+  
+  &--around {
+    justify-content: space-around;
+  }
+  
+  &--end {
+    justify-content: flex-end;
+  }
+}
+
+// Modern Focus Management
+:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+// Smooth Scrolling
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+// Print Styles
+@media print {
+  :root {
+    --color-bg: white;
+    --color-blue: black;
+  }
+  
+  .sidebar,
+  .navigation {
+    display: none;
+  }
+}

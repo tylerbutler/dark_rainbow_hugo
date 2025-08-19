@@ -1,0 +1,268 @@
+/**
+ * Modern Footnotes Styles - Replacement for Bigfoot.js styles
+ * Uses CSS custom properties for theming
+ */
+
+// Footnote button (replaces the original footnote link)
+.footnote-button {
+  display: inline;
+  background: var(--color-orange);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+  font-size: 0.8em;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.3em;
+  margin: 0 0.1em;
+  
+  &:hover {
+    background: var(--color-orange-dark);
+    transform: scale(1.1);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+  }
+  
+  &.footnote-active {
+    background: var(--color-orange-burnt);
+    transform: scale(1.1);
+  }
+}
+
+// Main popover container
+.footnote-popover {
+  position: absolute;
+  z-index: var(--z-tooltip);
+  background: var(--color-bg-accent);
+  border: 1px solid color-mix(in srgb, var(--color-bg-accent) 80%, white 20%);
+  border-radius: var(--border-radius-md);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(-10px) scale(0.95);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  max-width: 320px;
+  min-width: 200px;
+  
+  // Show state
+  &.footnote-popover--visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  
+  // Position variants
+  &.footnote-popover--above::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--color-bg-accent);
+  }
+  
+  &.footnote-popover--below::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--color-bg-accent);
+  }
+}
+
+// Popover content area
+.footnote-popover__content {
+  padding: var(--space-md);
+  color: var(--color-blue);
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-relaxed);
+  max-height: 300px;
+  overflow-y: auto;
+  
+  // Scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blue) var(--color-bg-accent);
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--color-bg-accent);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-blue);
+    border-radius: 3px;
+  }
+  
+  // Content styling
+  p {
+    margin-block: 0 var(--space-sm);
+    
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
+  
+  // Links in footnotes
+  a {
+    color: var(--color-green);
+    text-decoration-color: color-mix(in srgb, var(--color-green) 50%, transparent);
+    
+    &:hover {
+      color: var(--color-orange);
+      text-decoration-color: var(--color-orange);
+    }
+  }
+  
+  // Code in footnotes
+  code {
+    background: var(--color-bg);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+  }
+  
+  // Lists in footnotes
+  ul, ol {
+    margin-block: var(--space-sm);
+    padding-inline-start: var(--space-lg);
+  }
+  
+  li {
+    margin-block: var(--space-xs);
+  }
+}
+
+// Close button
+.footnote-popover__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--color-light);
+  font-size: 1.2em;
+  line-height: 1;
+  cursor: pointer;
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--color-bg);
+    color: var(--color-blue);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 1px;
+  }
+}
+
+// Responsive adjustments
+@media (width < 640px) {
+  .footnote-popover {
+    max-width: calc(100vw - var(--space-lg));
+    left: var(--space-md) !important;
+    right: var(--space-md);
+    width: auto !important;
+  }
+}
+
+// Animation for footnote highlight (when scrolling to footnote)
+.footnote-highlight {
+  background: color-mix(in srgb, var(--color-orange) 20%, transparent);
+  padding: var(--space-xs);
+  border-radius: var(--border-radius-sm);
+  animation: footnoteHighlight 3s ease-out;
+}
+
+@keyframes footnoteHighlight {
+  0% {
+    background: color-mix(in srgb, var(--color-orange) 40%, transparent);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+// Print styles - show original footnotes when printing
+@media print {
+  .footnote-button {
+    display: none;
+  }
+  
+  .footnote-popover {
+    display: none !important;
+  }
+  
+  // Show original footnote markers for print
+  .footnote-print-marker {
+    display: inline;
+    font-size: 0.8em;
+    vertical-align: super;
+    
+    &::before {
+      content: '[';
+    }
+    
+    &::after {
+      content: ']';
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .footnote-button {
+    border: 2px solid currentColor;
+  }
+  
+  .footnote-popover {
+    border: 2px solid currentColor;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .footnote-popover {
+    transition: opacity 0.1s;
+    
+    &.footnote-popover--visible {
+      transform: none;
+    }
+  }
+  
+  .footnote-button {
+    transition: background-color 0.1s;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+}

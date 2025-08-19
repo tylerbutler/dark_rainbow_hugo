@@ -1,0 +1,330 @@
+// Modern CSS/HTML Implementation
+// This file implements modern CSS alongside the existing system
+// for incremental migration with visual regression testing
+
+@import "modern-foundation";
+
+// Import existing system (for now)
+@import "libs";
+@import "../_shared/sass/baseline";
+@import "mixins";
+@import "colors";
+@import "typography";
+@import "../_shared/code_styles/_solarized.scss";
+@import "../_shared/sass/twitter";
+
+// Feature Detection Support
+.supports-grid {
+  display: none;
+}
+
+@supports (display: grid) {
+  .supports-grid {
+    display: block;
+  }
+  
+  .no-grid {
+    display: none;
+  }
+}
+
+// Modern Grid Layout Implementation
+// This runs alongside the existing Foundation grid
+body.modern-layout {
+  // Override existing body styles with CSS custom properties
+  background-color: var(--color-bg);
+  color: var(--color-blue);
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  margin: 0;
+  border-top: var(--border-width) solid var(--color-purple);
+  
+  // Modern Container
+  .container {
+    border-bottom: var(--border-width) solid var(--color-purple);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    
+    @media (width >= 768px) {
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-areas: 
+        "header header"
+        "sidebar main" 
+        "footer footer";
+    }
+    
+    @media (width < 768px) {
+      grid-template-areas:
+        "header"
+        "main"
+        "sidebar"
+        "footer";
+    }
+  }
+  
+  // Header Area
+  header#primary {
+    grid-area: header;
+    padding-block: var(--space-lg);
+    border-bottom: var(--border-width) solid var(--color-purple);
+    
+    h1 {
+      font-size: var(--font-size-xxl);
+      line-height: var(--line-height-tight);
+      margin-block: 0 var(--space-sm);
+      
+      a {
+        color: var(--color-strong-blue);
+        text-decoration: none;
+        
+        &:hover {
+          color: var(--color-orange);
+        }
+      }
+    }
+    
+    nav {
+      font-size: var(--font-size-xl);
+      text-align: right;
+      
+      @media (width < 768px) {
+        text-align: center;
+        font-size: var(--font-size-medium);
+      }
+      
+      ul {
+        display: flex;
+        gap: var(--space-md);
+        justify-content: flex-end;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        @media (width < 768px) {
+          justify-content: center;
+        }
+        
+        li a {
+          color: var(--color-strong-blue);
+          text-decoration: none;
+          
+          &:hover {
+            color: var(--color-orange);
+          }
+        }
+        
+        li.current a {
+          color: var(--color-orange-burnt);
+        }
+      }
+    }
+    
+    .highlight {
+      color: var(--color-orange-burnt);
+    }
+  }
+  
+  // Sidebar Area
+  #sidebar {
+    grid-area: sidebar;
+    padding: var(--space-lg);
+    
+    @media (width < 768px) {
+      padding: var(--space-md);
+      order: 3;
+    }
+    
+    section {
+      background-color: color-mix(in srgb, var(--color-bg) 93%, white 7%);
+      padding: var(--space-md);
+      border-radius: var(--border-radius-md);
+      margin-block-end: var(--space-lg);
+      text-align: center;
+      
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        li:not(:last-child)::after {
+          content: "/";
+          margin-inline-start: var(--space-xs);
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+  
+  // Main Content Area
+  section#main {
+    grid-area: main;
+    padding: var(--space-lg);
+    
+    @media (width < 768px) {
+      padding: var(--space-md);
+    }
+  }
+  
+  // Footer Area  
+  footer {
+    grid-area: footer;
+    border-top: 3px dotted var(--color-purple);
+    padding-block: var(--space-lg);
+    text-align: center;
+    font-size: var(--font-size-small);
+    
+    p {
+      font-size: var(--font-size-tiny);
+      margin: 0;
+    }
+  }
+  
+  // Article Styles with Modern CSS
+  article {
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-green);
+      font-family: var(--font-family-heading);
+    }
+    
+    h1 {
+      font-size: var(--font-size-large);
+      line-height: var(--line-height-tight);
+      margin-block: var(--space-lg) var(--space-md);
+    }
+    
+    h2 {
+      font-size: var(--font-size-medium);
+      line-height: var(--line-height-tight);
+      margin-block: var(--space-lg) var(--space-md);
+    }
+    
+    h3, h4, h5, h6 {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-tight);
+      margin-block: var(--space-lg) var(--space-md);
+    }
+    
+    p {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      margin-block: var(--space-md);
+    }
+    
+    // Links with modern color functions
+    a {
+      color: var(--color-green);
+      text-decoration-color: color-mix(in srgb, var(--color-green) 50%, transparent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      
+      &:hover {
+        color: var(--color-orange);
+        text-decoration-color: var(--color-orange);
+      }
+    }
+  }
+  
+  // Modern Code Blocks
+  pre, code {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-small);
+  }
+  
+  pre {
+    background: var(--color-bg-accent);
+    border-radius: var(--border-radius-md);
+    border-inline-start: var(--space-sm) solid var(--color-bg-accent);
+    padding: var(--space-md);
+    margin-block: var(--space-lg);
+    overflow-x: auto;
+    
+    // Modern scrollbars
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue) var(--color-bg-accent);
+    
+    &::-webkit-scrollbar {
+      height: 10px;
+      width: 10px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--color-bg-accent);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-blue);
+      border-radius: var(--border-radius-md);
+    }
+  }
+  
+  code:not(pre code) {
+    background: var(--color-bg-accent);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9em;
+  }
+  
+  // Modern Table Styling
+  table:not(.codehilitetable) {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    margin-block: var(--space-lg);
+    
+    th, td {
+      padding: var(--space-md);
+      text-align: start;
+      border-bottom: 1px solid var(--color-bg-accent);
+    }
+    
+    th {
+      background: var(--color-bg-accent);
+      font-weight: 600;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+  
+  // Modern Blockquotes
+  blockquote {
+    border-inline-start: var(--border-width) solid var(--color-purple);
+    margin-inline: var(--space-lg);
+    padding-inline: var(--space-lg);
+    font-style: italic;
+    
+    p {
+      margin-block: var(--space-md);
+    }
+  }
+}
+
+// Progressive Enhancement
+// Only apply modern styles when CSS Grid is supported
+@supports (display: grid) {
+  .modern-layout-toggle {
+    position: fixed;
+    top: var(--space-md);
+    right: var(--space-md);
+    z-index: var(--z-fixed);
+    background: var(--color-orange);
+    color: var(--color-bg);
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    
+    &:hover {
+      background: var(--color-orange-dark);
+    }
+  }
+}
