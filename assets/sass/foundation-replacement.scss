@@ -1,0 +1,224 @@
+/* Modern CSS replacement for Foundation grid system
+   Maintains exact visual compatibility with Foundation 6 while using modern CSS
+   Breakpoints: small=0, medium=640px, large=1024px */
+
+/* Reset and base styles to match Foundation */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Foundation Container System - Float-based like original */
+.row {
+  max-width: 75rem; /* Same as Foundation */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row::before,
+.row::after {
+  content: ' ';
+  display: table;
+}
+
+.row::after {
+  clear: both;
+}
+
+/* Support for nested rows */
+.row .row {
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
+  max-width: none;
+}
+
+.row.collapse > .column,
+.row.collapse > .columns {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Foundation Column System */
+.column,
+.columns {
+  width: 100%;
+  padding-left: 0.9375rem; /* 15px - Foundation's default gutter */
+  padding-right: 0.9375rem;
+  min-height: 1px; /* Prevent columns from collapsing */
+}
+
+/* Small Grid (Mobile First - Foundation default) */
+.small-1 { width: 8.33333%; }
+.small-2 { width: 16.66667%; }
+.small-3 { width: 25%; }
+.small-4 { width: 33.33333%; }
+.small-5 { width: 41.66667%; }
+.small-6 { width: 50%; }
+.small-7 { width: 58.33333%; }
+.small-8 { width: 66.66667%; }
+.small-9 { width: 75%; }
+.small-10 { width: 83.33333%; }
+.small-11 { width: 91.66667%; }
+.small-12 { width: 100%; }
+
+/* Small Push/Pull for Source Ordering */
+.small-push-1 { margin-left: 8.33333%; }
+.small-push-2 { margin-left: 16.66667%; }
+.small-push-3 { margin-left: 25%; }
+.small-push-4 { margin-left: 33.33333%; }
+.small-push-5 { margin-left: 41.66667%; }
+.small-push-6 { margin-left: 50%; }
+.small-push-7 { margin-left: 58.33333%; }
+.small-push-8 { margin-left: 66.66667%; }
+.small-push-9 { margin-left: 75%; }
+.small-push-10 { margin-left: 83.33333%; }
+.small-push-11 { margin-left: 91.66667%; }
+
+.small-pull-1 { margin-right: 8.33333%; }
+.small-pull-2 { margin-right: 16.66667%; }
+.small-pull-3 { margin-right: 25%; }
+.small-pull-4 { margin-right: 33.33333%; }
+.small-pull-5 { margin-right: 41.66667%; }
+.small-pull-6 { margin-right: 50%; }
+.small-pull-7 { margin-right: 58.33333%; }
+.small-pull-8 { margin-right: 66.66667%; }
+.small-pull-9 { margin-right: 75%; }
+.small-pull-10 { margin-right: 83.33333%; }
+.small-pull-11 { margin-right: 91.66667%; }
+
+/* Medium Grid (40em = 640px) */
+@media screen and (min-width: 40em) {
+  .medium-1 { width: 8.33333%; }
+  .medium-2 { width: 16.66667%; }
+  .medium-3 { width: 25%; }
+  .medium-4 { width: 33.33333%; }
+  .medium-5 { width: 41.66667%; }
+  .medium-6 { width: 50%; }
+  .medium-7 { width: 58.33333%; }
+  .medium-8 { width: 66.66667%; }
+  .medium-9 { width: 75%; }
+  .medium-10 { width: 83.33333%; }
+  .medium-11 { width: 91.66667%; }
+  .medium-12 { width: 100%; }
+
+  /* Medium Push/Pull */
+  .medium-push-1 { margin-left: 8.33333%; }
+  .medium-push-2 { margin-left: 16.66667%; }
+  .medium-push-3 { margin-left: 25%; }
+  .medium-push-4 { margin-left: 33.33333%; }
+  .medium-push-5 { margin-left: 41.66667%; }
+  .medium-push-6 { margin-left: 50%; }
+  .medium-push-7 { margin-left: 58.33333%; }
+  .medium-push-8 { margin-left: 66.66667%; }
+  .medium-push-9 { margin-left: 75%; }
+  .medium-push-10 { margin-left: 83.33333%; }
+  .medium-push-11 { margin-left: 91.66667%; }
+
+  .medium-pull-1 { margin-right: 8.33333%; }
+  .medium-pull-2 { margin-right: 16.66667%; }
+  .medium-pull-3 { margin-right: 25%; }
+  .medium-pull-4 { margin-right: 33.33333%; }
+  .medium-pull-5 { margin-right: 41.66667%; }
+  .medium-pull-6 { margin-right: 50%; }
+  .medium-pull-7 { margin-right: 58.33333%; }
+  .medium-pull-8 { margin-right: 66.66667%; }
+  .medium-pull-9 { margin-right: 75%; }
+  .medium-pull-10 { margin-right: 83.33333%; }
+  .medium-pull-11 { margin-right: 91.66667%; }
+}
+
+/* Large Grid (64em = 1024px) */
+@media screen and (min-width: 64em) {
+  .large-1 { width: 8.33333%; }
+  .large-2 { width: 16.66667%; }
+  .large-3 { width: 25%; }
+  .large-4 { width: 33.33333%; }
+  .large-5 { width: 41.66667%; }
+  .large-6 { width: 50%; }
+  .large-7 { width: 58.33333%; }
+  .large-8 { width: 66.66667%; }
+  .large-9 { width: 75%; }
+  .large-10 { width: 83.33333%; }
+  .large-11 { width: 91.66667%; }
+  .large-12 { width: 100%; }
+
+  /* Large Push/Pull */
+  .large-push-1 { margin-left: 8.33333%; }
+  .large-push-2 { margin-left: 16.66667%; }
+  .large-push-3 { margin-left: 25%; }
+  .large-push-4 { margin-left: 33.33333%; }
+  .large-push-5 { margin-left: 41.66667%; }
+  .large-push-6 { margin-left: 50%; }
+  .large-push-7 { margin-left: 58.33333%; }
+  .large-push-8 { margin-left: 66.66667%; }
+  .large-push-9 { margin-left: 75%; }
+  .large-push-10 { margin-left: 83.33333%; }
+  .large-push-11 { margin-left: 91.66667%; }
+
+  .large-pull-1 { margin-right: 8.33333%; }
+  .large-pull-2 { margin-right: 16.66667%; }
+  .large-pull-3 { margin-right: 25%; }
+  .large-pull-4 { margin-right: 33.33333%; }
+  .large-pull-5 { margin-right: 41.66667%; }
+  .large-pull-6 { margin-right: 50%; }
+  .large-pull-7 { margin-right: 58.33333%; }
+  .large-pull-8 { margin-right: 66.66667%; }
+  .large-pull-9 { margin-right: 75%; }
+  .large-pull-10 { margin-right: 83.33333%; }
+  .large-pull-11 { margin-right: 91.66667%; }
+}
+
+/* Text Alignment Classes */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.text-justify { text-align: justify; }
+
+@media screen and (min-width: 40em) {
+  .medium-text-left { text-align: left; }
+  .medium-text-right { text-align: right; }
+  .medium-text-center { text-align: center; }
+  .medium-text-justify { text-align: justify; }
+}
+
+@media screen and (min-width: 64em) {
+  .large-text-left { text-align: left; }
+  .large-text-right { text-align: right; }
+  .large-text-center { text-align: center; }
+  .large-text-justify { text-align: justify; }
+}
+
+/* Foundation Row/Column Behavior Compatibility */
+.column:last-child:not(:first-child),
+.columns:last-child:not(:first-child) {
+  float: right;
+}
+
+.column.end:last-child:last-child,
+.end.columns:last-child:last-child {
+  float: left;
+}
+
+/* Centered columns */
+.column.small-centered,
+.small-centered.columns {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 40em) {
+  .column.medium-centered,
+  .medium-centered.columns {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .column.large-centered,
+  .large-centered.columns {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

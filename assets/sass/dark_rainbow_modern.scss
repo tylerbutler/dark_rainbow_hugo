@@ -2,10 +2,9 @@
 // This file implements modern CSS alongside the existing system
 // for incremental migration with visual regression testing
 
-@import "modern-foundation";
+@import "visual-match-foundation";
 
-// Import existing system (for now)
-@import "libs";
+// Modern CSS - no Foundation imports needed
 @import "../_shared/sass/baseline";
 @import "mixins";
 @import "colors";
@@ -47,7 +46,7 @@ body.modern-layout {
     display: grid;
     grid-template-rows: auto 1fr auto;
     
-    @media (width >= 768px) {
+    @media (min-width: 768px) {
       grid-template-columns: var(--sidebar-width) 1fr;
       grid-template-areas: 
         "header header"
@@ -55,7 +54,7 @@ body.modern-layout {
         "footer footer";
     }
     
-    @media (width < 768px) {
+    @media (max-width: 767px) {
       grid-template-areas:
         "header"
         "main"
@@ -89,7 +88,7 @@ body.modern-layout {
       font-size: var(--font-size-xl);
       text-align: right;
       
-      @media (width < 768px) {
+      @media (max-width: 767px) {
         text-align: center;
         font-size: var(--font-size-medium);
       }
@@ -102,7 +101,7 @@ body.modern-layout {
         margin: 0;
         padding: 0;
         
-        @media (width < 768px) {
+        @media (max-width: 767px) {
           justify-content: center;
         }
         
@@ -131,7 +130,7 @@ body.modern-layout {
     grid-area: sidebar;
     padding: var(--space-lg);
     
-    @media (width < 768px) {
+    @media (max-width: 767px) {
       padding: var(--space-md);
       order: 3;
     }
@@ -166,7 +165,7 @@ body.modern-layout {
     grid-area: main;
     padding: var(--space-lg);
     
-    @media (width < 768px) {
+    @media (max-width: 767px) {
       padding: var(--space-md);
     }
   }

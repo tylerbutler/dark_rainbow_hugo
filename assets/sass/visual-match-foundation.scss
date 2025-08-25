@@ -1,0 +1,308 @@
+/* Modern CSS that produces identical visual results to Foundation
+   Focus: Visual consistency, not implementation replication
+   Uses flexbox and modern CSS but maintains exact original layout appearance
+   HIGH SPECIFICITY: Overrides Foundation CSS when layout=modern is active */
+
+/* Reset and base styles matching original theme */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Base typography to match original theme dimensions */
+body.modern-layout {
+  font-size: 18px !important;
+  line-height: 22px !important; /* Slightly tighter than original 25px */
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Typography scale to match original */
+body.modern-layout h1 { 
+  font-size: 2.5rem !important; 
+  line-height: 1.4 !important;
+  margin-bottom: 0.5rem !important;
+}
+body.modern-layout h2 { 
+  font-size: 2rem !important; 
+  line-height: 1.4 !important;
+}
+body.modern-layout h3 { 
+  font-size: 1.5rem !important; 
+  line-height: 1.4 !important;
+}
+
+/* Paragraph spacing to match original - reduced for compactness */
+body.modern-layout p {
+  margin-bottom: 0.75rem !important; /* Reduced from 1rem */
+  line-height: 1.5 !important; /* Reduced from 1.6 */
+}
+
+/* Container styling to match original theme */
+body.modern-layout .container {
+  border-bottom: 5px solid #7750cb !important; /* $purple from original */
+}
+
+/* Body spacing to match original */
+body.modern-layout body {
+  margin: 0 !important;
+  border-top: 5px solid #7750cb !important;
+}
+
+/* Header/navigation proper spacing - reduced */
+body.modern-layout header#primary {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+body.modern-layout header#primary h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+}
+
+body.modern-layout header#primary nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+}
+
+body.modern-layout header#primary nav ul {
+  display: flex !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.modern-layout header#primary nav ul li {
+  margin-left: 1.5rem !important;
+}
+
+/* Container system - matches Foundation's visual behavior with high specificity */
+body.modern-layout .row {
+  max-width: 75rem !important; /* 1200px - same as Foundation */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0.9375rem !important; /* 15px */
+  padding-right: 0.9375rem !important; /* 15px */
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+}
+
+/* Clear fix for compatibility */
+.row::before,
+.row::after {
+  content: '';
+  display: table;
+}
+
+.row::after {
+  clear: both;
+}
+
+/* Nested rows */
+.row .row {
+  margin-left: -0.9375rem;
+  margin-right: -0.9375rem;
+  max-width: none;
+}
+
+/* Column system - flexbox implementation that matches Foundation visual output */
+body.modern-layout .column,
+body.modern-layout .columns {
+  padding-left: 0.9375rem !important; /* 15px gutter */
+  padding-right: 0.9375rem !important;
+  width: 100% !important;
+  min-height: 1px !important;
+}
+
+/* Responsive grid that matches Foundation's visual breakpoints exactly */
+
+/* Small (mobile first) - high specificity overrides */
+body.modern-layout .small-1 { flex: 0 0 8.33333% !important; width: 8.33333% !important; }
+body.modern-layout .small-2 { flex: 0 0 16.66667% !important; width: 16.66667% !important; }
+body.modern-layout .small-3 { flex: 0 0 25% !important; width: 25% !important; }
+body.modern-layout .small-4 { flex: 0 0 33.33333% !important; width: 33.33333% !important; }
+body.modern-layout .small-5 { flex: 0 0 41.66667% !important; width: 41.66667% !important; }
+body.modern-layout .small-6 { flex: 0 0 50% !important; width: 50% !important; }
+body.modern-layout .small-7 { flex: 0 0 58.33333% !important; width: 58.33333% !important; }
+body.modern-layout .small-8 { flex: 0 0 66.66667% !important; width: 66.66667% !important; }
+body.modern-layout .small-9 { flex: 0 0 75% !important; width: 75% !important; }
+body.modern-layout .small-10 { flex: 0 0 83.33333% !important; width: 83.33333% !important; }
+body.modern-layout .small-11 { flex: 0 0 91.66667% !important; width: 91.66667% !important; }
+body.modern-layout .small-12 { flex: 0 0 100% !important; width: 100% !important; }
+
+/* Medium screens (640px+) - matches Foundation's 40em breakpoint */
+@media screen and (min-width: 40em) {
+  body.modern-layout .medium-1 { flex: 0 0 8.33333% !important; width: 8.33333% !important; }
+  body.modern-layout .medium-2 { flex: 0 0 16.66667% !important; width: 16.66667% !important; }
+  body.modern-layout .medium-3 { flex: 0 0 25% !important; width: 25% !important; }
+  body.modern-layout .medium-4 { flex: 0 0 33.33333% !important; width: 33.33333% !important; }
+  body.modern-layout .medium-5 { flex: 0 0 41.66667% !important; width: 41.66667% !important; }
+  body.modern-layout .medium-6 { flex: 0 0 50% !important; width: 50% !important; }
+  body.modern-layout .medium-7 { flex: 0 0 58.33333% !important; width: 58.33333% !important; }
+  body.modern-layout .medium-8 { flex: 0 0 66.66667% !important; width: 66.66667% !important; }
+  body.modern-layout .medium-9 { flex: 0 0 75% !important; width: 75% !important; }
+  body.modern-layout .medium-10 { flex: 0 0 83.33333% !important; width: 83.33333% !important; }
+  body.modern-layout .medium-11 { flex: 0 0 91.66667% !important; width: 91.66667% !important; }
+  body.modern-layout .medium-12 { flex: 0 0 100% !important; width: 100% !important; }
+}
+
+/* Large screens (1024px+) - matches Foundation's 64em breakpoint */
+@media screen and (min-width: 64em) {
+  .large-1 { flex: 0 0 8.33333%; width: 8.33333%; }
+  .large-2 { flex: 0 0 16.66667%; width: 16.66667%; }
+  .large-3 { flex: 0 0 25%; width: 25%; }
+  .large-4 { flex: 0 0 33.33333%; width: 33.33333%; }
+  .large-5 { flex: 0 0 41.66667%; width: 41.66667%; }
+  .large-6 { flex: 0 0 50%; width: 50%; }
+  .large-7 { flex: 0 0 58.33333%; width: 58.33333%; }
+  .large-8 { flex: 0 0 66.66667%; width: 66.66667%; }
+  .large-9 { flex: 0 0 75%; width: 75%; }
+  .large-10 { flex: 0 0 83.33333%; width: 83.33333%; }
+  .large-11 { flex: 0 0 91.66667%; width: 91.66667%; }
+  .large-12 { flex: 0 0 100%; width: 100%; }
+}
+
+/* Push/Pull classes using modern CSS */
+.small-push-1 { margin-left: 8.33333%; }
+.small-push-2 { margin-left: 16.66667%; }
+.small-push-3 { margin-left: 25%; }
+.small-push-4 { margin-left: 33.33333%; }
+.small-push-5 { margin-left: 41.66667%; }
+.small-push-6 { margin-left: 50%; }
+.small-push-7 { margin-left: 58.33333%; }
+.small-push-8 { margin-left: 66.66667%; }
+.small-push-9 { margin-left: 75%; }
+.small-push-10 { margin-left: 83.33333%; }
+.small-push-11 { margin-left: 91.66667%; }
+
+.small-pull-1 { margin-right: 8.33333%; }
+.small-pull-2 { margin-right: 16.66667%; }
+.small-pull-3 { margin-right: 25%; }
+.small-pull-4 { margin-right: 33.33333%; }
+.small-pull-5 { margin-right: 41.66667%; }
+.small-pull-6 { margin-right: 50%; }
+.small-pull-7 { margin-right: 58.33333%; }
+.small-pull-8 { margin-right: 66.66667%; }
+.small-pull-9 { margin-right: 75%; }
+.small-pull-10 { margin-right: 83.33333%; }
+.small-pull-11 { margin-right: 91.66667%; }
+
+@media screen and (min-width: 40em) {
+  .medium-push-1 { margin-left: 8.33333%; }
+  .medium-push-2 { margin-left: 16.66667%; }
+  .medium-push-3 { margin-left: 25%; }
+  .medium-push-4 { margin-left: 33.33333%; }
+  .medium-push-5 { margin-left: 41.66667%; }
+  .medium-push-6 { margin-left: 50%; }
+  .medium-push-7 { margin-left: 58.33333%; }
+  .medium-push-8 { margin-left: 66.66667%; }
+  .medium-push-9 { margin-left: 75%; }
+  .medium-push-10 { margin-left: 83.33333%; }
+  .medium-push-11 { margin-left: 91.66667%; }
+
+  .medium-pull-1 { margin-right: 8.33333%; }
+  .medium-pull-2 { margin-right: 16.66667%; }
+  .medium-pull-3 { margin-right: 25%; }
+  .medium-pull-4 { margin-right: 33.33333%; }
+  .medium-pull-5 { margin-right: 41.66667%; }
+  .medium-pull-6 { margin-right: 50%; }
+  .medium-pull-7 { margin-right: 58.33333%; }
+  .medium-pull-8 { margin-right: 66.66667%; }
+  .medium-pull-9 { margin-right: 75%; }
+  .medium-pull-10 { margin-right: 83.33333%; }
+  .medium-pull-11 { margin-right: 91.66667%; }
+}
+
+@media screen and (min-width: 64em) {
+  .large-push-1 { margin-left: 8.33333%; }
+  .large-push-2 { margin-left: 16.66667%; }
+  .large-push-3 { margin-left: 25%; }
+  .large-push-4 { margin-left: 33.33333%; }
+  .large-push-5 { margin-left: 41.66667%; }
+  .large-push-6 { margin-left: 50%; }
+  .large-push-7 { margin-left: 58.33333%; }
+  .large-push-8 { margin-left: 66.66667%; }
+  .large-push-9 { margin-left: 75%; }
+  .large-push-10 { margin-left: 83.33333%; }
+  .large-push-11 { margin-left: 91.66667%; }
+
+  .large-pull-1 { margin-right: 8.33333%; }
+  .large-pull-2 { margin-right: 16.66667%; }
+  .large-pull-3 { margin-right: 25%; }
+  .large-pull-4 { margin-right: 33.33333%; }
+  .large-pull-5 { margin-right: 41.66667%; }
+  .large-pull-6 { margin-right: 50%; }
+  .large-pull-7 { margin-right: 58.33333%; }
+  .large-pull-8 { margin-right: 66.66667%; }
+  .large-pull-9 { margin-right: 75%; }
+  .large-pull-10 { margin-right: 83.33333%; }
+  .large-pull-11 { margin-right: 91.66667%; }
+}
+
+/* Text alignment utilities */
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+.text-justify { text-align: justify; }
+
+@media screen and (min-width: 40em) {
+  .medium-text-left { text-align: left; }
+  .medium-text-right { text-align: right; }
+  .medium-text-center { text-align: center; }
+  .medium-text-justify { text-align: justify; }
+}
+
+@media screen and (min-width: 64em) {
+  .large-text-left { text-align: left; }
+  .large-text-right { text-align: right; }
+  .large-text-center { text-align: center; }
+  .large-text-justify { text-align: justify; }
+}
+
+/* Centering */
+.small-centered,
+.column.small-centered,
+.columns.small-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 40em) {
+  .medium-centered,
+  .column.medium-centered,
+  .columns.medium-centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .large-centered,
+  .column.large-centered,
+  .columns.large-centered {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Collapse gutters */
+.row.collapse > .column,
+.row.collapse > .columns {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Foundation visual compatibility fixes */
+.column:last-child:not(:first-child),
+.columns:last-child:not(:first-child) {
+  float: none; /* Override Foundation float behavior in flexbox */
+}
+
+.column.end:last-child:last-child,
+.end.columns:last-child:last-child {
+  float: none; /* Override Foundation float behavior in flexbox */
+}

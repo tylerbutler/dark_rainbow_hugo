@@ -113,6 +113,8 @@
     }
     
     // Feature detection for CSS Grid
+    document.documentElement.classList.remove('no-js'); // Remove no-js class
+    
     if (CSS.supports('display', 'grid')) {
       document.documentElement.classList.add('supports-grid');
       document.documentElement.classList.remove('no-grid');

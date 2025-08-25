@@ -1,0 +1,21 @@
+{{ define "main" }}
+<div class="posts h-feed">
+  <article class="post h-entry">
+    <header>
+      <h1>{{ .Title }}</h1>
+    </header>
+    <div class="post-content">
+      {{ .Content }}
+      
+      <p>This page uses the modern layout system with:</p>
+      <ul>
+        <li>CSS Grid and Flexbox layouts</li>
+        <li>Modern vanilla JavaScript (no jQuery)</li>
+        <li>Progressive enhancement with feature detection</li>
+        <li>Self-hosted assets (no CDN dependencies)</li>
+        <li>Accessibility improvements with ARIA labels</li>
+      </ul>
+    </div>
+  </article>
+</div>
+{{ end }}

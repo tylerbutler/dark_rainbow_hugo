@@ -45,7 +45,7 @@
   {{ hugo.Generator }}
 </head>
 
-<body class="">
+<body class="" id="layout-body">
   <div class="container">
     {{ block "header" . }}{{ partial "site-header.html" . }}{{ end }}
     {{ block "subheader" . }}{{ end }}
@@ -63,6 +63,44 @@
 
   {{ block "site-scripts-bottom" . }}{{ partial "site-scripts-bottom.html" . }}{{ end }}
   {{ block "site-scripts-bottom-additional" . }}{{ partial "site-scripts-bottom-additional.html" . }}{{ end }}
+
+  <!-- Layout toggle functionality for testing modern layout -->
+  <script>
+    // Check for layout=modern URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('layout') === 'modern') {
+      // Remove no-js and add supports-grid for feature detection
+      document.documentElement.classList.remove('no-js');
+      
+      if (CSS.supports('display', 'grid')) {
+        document.documentElement.classList.add('supports-grid');
+        document.documentElement.classList.remove('no-grid');
+      } else {
+        document.documentElement.classList.add('no-grid');
+        document.documentElement.classList.remove('supports-grid');
+      }
+      
+      // Apply modern layout styles
+      document.body.classList.add('modern-layout');
+      document.body.classList.remove('classic-layout');
+      
+      // Replace foundation CSS with modern CSS
+      {{ $modernOptions := (dict "targetPath" "dark_rainbow_modern.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "shared_assets")) }}
+      {{ $modernStyle := resources.Get "sass/dark_rainbow_modern.scss" | css.Sass $modernOptions | resources.Fingerprint "sha256" }}
+      
+      // Remove existing foundation CSS
+      const existingCSS = document.querySelector('link[href*="dark_rainbow"]');
+      const semanticCSS = document.querySelector('link[href*="semantic-ui"]');
+      if (existingCSS) existingCSS.remove();
+      if (semanticCSS) semanticCSS.remove();
+      
+      // Add modern CSS
+      const modernCSS = document.createElement('link');
+      modernCSS.rel = 'stylesheet';
+      modernCSS.href = '{{ $modernStyle.RelPermalink }}';
+      document.head.appendChild(modernCSS);
+    }
+  </script>
 </body>
 
 </html>
