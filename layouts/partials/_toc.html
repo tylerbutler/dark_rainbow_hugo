@@ -1,9 +1,173 @@
 {{ $renderContext := .Scratch.Get "renderContext" }}
-<!-- {{ printf "TOC renderContext %#v" $renderContext }} -->
+<!-- Modern Table of Contents with CSS sticky positioning -->
 
 {{ if (and .TableOfContents (eq .Type "guide") (ne $renderContext "home")) }}
-<div class="hide-for-small-only toc ui sticky">
+<nav class="toc modern-sticky" aria-label="Table of contents">
   <h4>Contents</h4>
   {{ .TableOfContents }}
-</div>
+</nav>
+
+<!-- Enhanced TOC styles for modern layout -->
+<style>
+  .toc.modern-sticky {
+    font-family: var(--font-family-main);
+    border-top: 1px dotted var(--color-purple);
+    padding-top: var(--space-md);
+    margin-top: var(--space-md);
+    font-size: var(--font-size-small);
+    
+    h4 {
+      color: var(--color-green);
+      font-family: var(--font-family-heading);
+      margin-block: 0 var(--space-sm);
+    }
+    
+    ul {
+      padding-inline-start: 0;
+      margin: 0;
+      list-style: none;
+      
+      li {
+        padding: 0;
+        margin-block: var(--space-xs);
+        
+        a {
+          color: var(--color-blue);
+          text-decoration: none;
+          display: block;
+          padding: var(--space-xs) 0;
+          border-radius: var(--border-radius-sm);
+          transition: all 0.2s ease;
+          
+          &:hover {
+            color: var(--color-orange);
+            background: color-mix(in srgb, var(--color-orange) 10%, transparent);
+            padding-inline-start: var(--space-sm);
+          }
+          
+          &:focus-visible {
+            outline: 2px solid var(--color-orange);
+            outline-offset: 2px;
+          }
+        }
+        
+        /* Nested list styling */
+        ul {
+          padding-inline-start: var(--space-md);
+          margin-block-start: var(--space-xs);
+          
+          li::before {
+            content: "»";
+            color: var(--color-light);
+            margin-inline-end: var(--space-xs);
+          }
+        }
+      }
+    }
+    
+    /* Active link highlighting */
+    li a.active,
+    li a[aria-current="true"] {
+      color: var(--color-orange);
+      background: color-mix(in srgb, var(--color-orange) 15%, transparent);
+      padding-inline-start: var(--space-sm);
+      border-inline-start: 3px solid var(--color-orange);
+    }
+  }
+  
+  /* Responsive adjustments */
+  @media (width < 768px) {
+    .toc.modern-sticky {
+      display: none;
+    }
+  }
+  
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .toc.modern-sticky {
+      border: 2px solid var(--color-blue);
+      
+      li a.active {
+        border-inline-start: 4px solid var(--color-orange);
+      }
+    }
+  }
+  
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .toc.modern-sticky li a {
+      transition: none;
+    }
+  }
+</style>
+
+<!-- Enhanced TOC behavior with Intersection Observer -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toc = document.querySelector('.toc.modern-sticky');
+    if (!toc) return;
+    
+    // Get all headings that might be in the TOC
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const tocLinks = toc.querySelectorAll('a[href^="#"]');
+    
+    if (headings.length === 0 || tocLinks.length === 0) return;
+    
+    // Create intersection observer for active link highlighting
+    const observerOptions = {
+      rootMargin: '-20% 0px -35% 0px',
+      threshold: 0
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const correspondingLink = toc.querySelector(`a[href="#${id}"]`);
+        
+        if (correspondingLink) {
+          if (entry.isIntersecting) {
+            // Remove active class from all links
+            tocLinks.forEach(link => {
+              link.classList.remove('active');
+              link.removeAttribute('aria-current');
+            });
+            
+            // Add active class to current link
+            correspondingLink.classList.add('active');
+            correspondingLink.setAttribute('aria-current', 'true');
+          }
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all headings with IDs
+    headings.forEach(heading => {
+      if (heading.id) {
+        observer.observe(heading);
+      }
+    });
+    
+    // Smooth scroll for TOC links
+    tocLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href').slice(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // Update URL without jumping
+          if (history.pushState) {
+            history.pushState(null, null, `#${targetId}`);
+          }
+        }
+      });
+    });
+  });
+</script>
 {{ end }}

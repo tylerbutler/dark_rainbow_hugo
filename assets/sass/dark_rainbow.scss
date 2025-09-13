@@ -1,4 +1,7 @@
-@import "libs";
+// Modern CSS Implementation
+// Cleaned up version with CSS Grid layout and no external dependencies
+
+// Modern CSS - no Foundation imports needed
 @import "../_shared/sass/baseline";
 @import "mixins";
 @import "colors";
@@ -6,821 +9,296 @@
 @import "../_shared/code_styles/_solarized.scss";
 @import "../_shared/sass/twitter";
 
-.replace_me {
-  background-color: yellow;
+// Feature Detection Support
+.supports-grid {
+  display: none;
 }
 
-// Max width for the site
-.row {
-  max-width: 1000px;
-}
-
-// Variables //
-$border: 5px solid $purple;
-
-////////////////////
-// ELEMENT STYLES //
-////////////////////
-@include link-color($green, $orange);
-
-blockquote,
-blockquote p,
-code,
-pre,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  // Reset some styles that Foundation 5 seems to set
-  color: $blue;
-}
-
-body {
-  background-color: $bg;
-  color: $blue;
-  font-family: $font-main;
-  @include font-size-default();
-  margin: 0;
-  border-top: $border;
-}
-
-.container {
-  border-bottom: $border;
-}
-
-header,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: $font-heading;
-}
-
-header,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  + div {
-    @include font-size-default();
+@supports (display: grid) {
+  .supports-grid {
+    display: block;
   }
-}
-
-p,
-p + div,
-blockquote {
-  @include font-size-default();
-}
-
-ul + p,
-ol + p {
-  @include font-size-default(1, 1);
-}
-
-ul {
-  padding-left: 21px;
-  li {
-    text-indent: -9px;
-  }
-}
-
-ol {
-  padding-left: 21px;
-}
-
-hr {
-  border-top: none;
-  border-bottom: 3px dotted $purple;
-  border-left: none;
-  border-right: none;
-  margin-left: auto;
-  margin-right: auto;
-  clear: both;
-  width: 20%;
-}
-
-blockquote {
-  padding: 0 10px 0 20px;
-  margin-left: 15px;
-  border-left: $border;
-
-  p,
-  div {
-    font-style: italic;
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-weight: bold;
-      font-style: normal;
-    }
-  }
-}
-
-table:not(.codehilitetable) {
-  border: 1px solid $bg-accent;
-  border-collapse: separate;
-  border-spacing: 0;
-  @include border-radius(4px);
-  @include margin-calc($line-height-default, 0, 1, -1px, -1px);
-  width: 100%;
-  max-width: 100%;
-
-  th {
-    font-weight: bold;
-  }
-
-  th,
-  td {
-    border-left: 1px solid $bg-accent;
-    border-top: 1px solid $bg-accent;
-    vertical-align: top;
-    padding: 8px;
-    text-align: left;
-  }
-
-  thead {
-    tr:first-child {
-      td,
-      th {
-        border-top: none;
-        &:first-child {
-          border-left: none;
-        }
-      }
-    }
-  }
-
-  tbody {
-    tr {
-      td:first-child {
-        border-left: none;
-      }
-    }
-  }
-}
-
-sup {
-  @include font-size-tiny();
-  vertical-align: baseline;
-  position: relative;
-  top: -0.99ex;
-}
-
-dl {
-  dt {
-    font-weight: bold;
-    @include font-size-default(0, 0);
-  }
-
-  dd {
-    margin-left: 25px;
-    @include font-size-default();
-  }
-}
-
-article {
-  blockquote,
-  blockquote p,
-  code,
-  pre,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    // Reset some styles that Foundation 5 seems to set
-    background-color: $bg;
-  }
-
-  @include bulleted-list();
-
-  > div,
-  > p,
-  > span {
-    @include bulleted-list();
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: $green;
-  }
-
-  h1 {
-    @include font-size-large(0.8, 0.2);
-  }
-
-  header h1 {
-    @include font-size-large(0.5, 0.5);
-  }
-
-  h2 {
-    @include font-size-medium(0.8, 0.2);
-  }
-
-  h3,
-  h4,
-  h5,
-  h6 {
-    @include font-size-default(0.8, 0.2);
-  }
-
-  p:first-child {
-    @include font-size-default(1, 1);
-  }
-}
-
-.post-links {
-  ul {
-    padding-left: 0.9375rem;
-
-    &.small-block-grid,
-    &.medium-block-grid,
-    &.large-block-grid {
-      &-1,
-      &-2,
-      &-3,
-      &-4,
-      &-5,
-      &-6,
-      &-7,
-      &-8,
-      &-9,
-      &-10,
-      &-11,
-      &-12 {
-        li {
-          text-indent: 0;
-
-          &:first-child {
-            text-align: left;
-          }
-
-          &:last-child {
-            text-align: right;
-          }
-        }
-      }
-    }
-  }
-}
-
-.image {
-  @include border-radius(5px);
-  background-color: $bg-accent;
-  padding: 10px 10px 0 10px;
-  width: 500px;
-
-  &.caption {
-    padding: 10px 10px 0 10px;
-    p {
-      font-size: 1.5rem;
-      padding-bottom: 8px;
-    }
-  }
-}
-
-.button {
-  @include border-radius(2px);
-  background-color: $bg-accent;
-  padding: 10px;
-  font-size: 1.5rem;
-
-  &:hover {
-    background-color: $orange;
-    color: $bg-accent;
-  }
-}
-
-// PYGMENTS / CODE
-pre,
-code {
-  font-family: $font-mono;
-  overflow: auto;
-  margin: 0;
-}
-
-p > code,
-em > code,
-strong > code {
-  white-space: nowrap;
-  @include font-size-default();
-  margin: 0;
-}
-
-//noinspection CssOverwrittenProperties
-@mixin code-border {
-  border: 1px solid $bg-accent;
-  border-left: 10px solid $bg-accent;
-  padding-left: 5px;
-  margin: 0 0 0 -15px;
-  @include font-size-small();
-}
-
-article,
-div,
-p {
-  > div.codehilite,
-  > div.highlight {
-    @include code-border;
-    @include margin-calc($line-height-default, 0, 1, -1px, -1px);
-  }
-}
-
-/* nice scrollbars in webkit */
-pre,
-code,
-div.codehilite,
-table.codehilitetable,
-div.highlight {
-  ::-webkit-scrollbar {
-    height: 10px;
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-button:start:decrement,
-  ::-webkit-scrollbar-button:end:increment {
-    background: transparent;
+  
+  .no-grid {
     display: none;
   }
-
-  ::-webkit-scrollbar-track-piece {
-    background: $bg-accent;
-  }
-
-  ::-webkit-scrollbar-thumb:vertical,
-  ::-webkit-scrollbar-thumb:horizontal {
-    background: $blue;
-    @include border-radius(5px);
-    display: block;
-    height: 50px;
-  }
 }
 
-table.codehilitetable {
-  width: 100%;
-  table-layout: fixed;
-  @include code-border;
-
-  td.linenos {
-    border-right: 1px solid $bg-accent;
-    width: 26px;
-  }
-
-  td.code {
-    padding-left: 10px;
-  }
-}
-
-div.linenodiv {
-  color: $light;
-  font-weight: normal;
-  padding-right: 10px;
-}
-
-div.codehilite,
-table.codehilitetable,
-div.highlight {
-  td {
-    padding: 5px;
-  }
-}
-
-// TOP HEADER
-header#primary {
-  h1 {
-    @include font-size-xxl(1, 0);
-    @include margin-calc($line-height-double, 0.9, 0.1, -5px, -5px);
-    @include link-color-single($strong-blue);
-  }
-
-  nav {
-    @media #{$small-only} {
-      @include font-size-large(1, 0);
-    }
-    @include font-size-xl(1, 0);
-    @include margin-calc($line-height-double, 0.9, 0.1, -1px, -5px);
-    @include link-color($strong-blue, $orange);
-    @include horizontal-list(0, 16px);
-    text-align: right;
-
-    ul {
-      li.current {
-        @include link-color($orange-burnt, $orange);
-      }
-    }
-  }
-
-  span.highlight {
-    color: $orange-burnt;
-  }
-
-  padding-bottom: 20px;
-  border-bottom: $border;
-}
-
-// SECTION HEADER
-header#secondary {
-  h1 {
-    @include font-size-large(0.5, 0.5);
-    color: $green;
-  }
-
-  nav {
-    @include font-size-medium(1, 1);
-    float: right;
-    text-align: right;
-    @include horizontal-list(0, 16px);
-  }
-
-  border-bottom: 2px dotted $purple;
-}
-
-// SEARCH
-section#search {
-  @include margin-calc($line-height-default, 0.5, 0.5, 0, 0);
-  @include font-size-default(0, 0);
-  text-align: left;
-}
-
-input.search {
-  @include border-radius(5px);
-  font-family: $font-main;
-  font-size: 1.8rem;
-  margin: auto;
-  width: 90%;
-  background-color: lighten($bg, 15%);
-  border: 1px solid lighten($bg, 50%);
-  padding: 0.2em 0.3em;
-  color: $blue;
-}
-
-input::-webkit-input-placeholder {
-  color: $blue;
-}
-
-input:-moz-placeholder {
-  color: $blue;
-}
-
-input:-ms-input-placeholder {
-  color: $blue;
-}
-
-// POSTS
-@media #{$medium} {
-  .post-info {
-    font-family: museo-slab, sans-serif;
-
-    .post-date {
-      @include font-size-default(1, 0);
-      text-align: center;
-      text-transform: uppercase;
-      $calendar-border: 1px dotted $purple;
-      border-bottom: $calendar-border;
-
-      // .month {
-      //   margin-bottom: -15px;
-      // }
-
-      .day {
-        font-family: kulturista-web, museo-sans, deva-ideal, obliqua, sans-serif;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 72px;
-        line-height: 75px;
-      }
-    }
-  }
-
-  .sharing {
-    padding-top: 5px;
-    border-top: 1px dotted $purple;
-  }
-
-  .post-content {
-    padding-left: 30px;
-  }
-}
-
-// SIDEBAR
-#sidebar {
-  section {
-    @include text-center;
-    @include panel(lighten($bg, 7%), 1em);
-    @include horizontal-list(5px, 0);
-
-    ul li {
-      padding-right: 0;
-    }
-
-    ul li:not(:last-child) {
-      &:after {
-        content: "/";
-        padding-left: 9px;
-        padding-right: 5px;
-      }
-    }
-  }
-}
-
-.micropost {
-  @include panel(lighten($bg, 7%), 1em);
-  border-left: 5px $purple solid;
-
-  .post-date {
-    @include font-size-tiny(0.5, 0);
-    @include link-color($blue, $orange);
-    text-align: right;
-  }
-}
-
-// TABLE OF CONTENTS
-.toc {
-  font-family: $font-main;
-  border-top: 1px dotted $purple;
-  padding-top: 10px;
-  margin-top: 7px;
-}
-
-#TableOfContents {
-  font-family: $font-main;
-  @include font-size-small();
-  @include link-color($blue, $orange);
-
-  h4 {
-    //font-family: $font-main;
-    color: $green;
-  }
-
-  > ul {
-    padding: 0;
-    > li {
-      padding: 0;
-      > ul {
-        padding-left: 5px;
-
-        li:before {
-          font-size: $font-size-default + 2;
-          content: "»";
-          padding-right: 6px;
-          margin-left: -5px;
-        }
-      }
-    }
-  }
-}
-
-div.sticky-holder {
-  position: relative;
-}
-
-// FOOTER
-footer {
-  border-top: 3px dotted $purple;
-  padding-top: 0.5 * $line-height-default;
-  @include font-size-small(0.5, 0.5);
-  margin-top: 0.5 * $line-height-default !important;
-  text-align: center;
-
-  p {
-    @include font-size-tiny(0, 0);
-  }
-}
-
-.archives {
-  h2 {
-    @include font-size-large(0.2, 0);
-  }
-  article {
-    @media #{$medium} {
-      border-bottom: 1px dotted $purple;
-    }
-    .post-date {
-      @include font-size-default(0.7, 0.3);
-    }
-    h1 {
-      @include font-size-medium(0.7, 0.3);
-    }
-  }
-}
-
-div.row.archives {
-  @include font-size-default(2, 0);
-}
-
-// FOOTNOTES
-.footnote-content-wrapper {
-  color: $bg;
-}
-
-// COMMENTS
-#comments {
-  border-top: 3px dotted $purple;
-  margin-top: $line-height-default;
-  h1 {
-    @include font-size-medium(1, 0.5);
-  }
-}
-
-// MISCELLANEOUS
-.permalink {
-  a {
-    font-family: Verdana, sans-serif;
-  }
-  @include link-color($purple, $orange);
-  font-size: 26px;
-  margin-bottom: 5px;
-}
-
-.attribution {
-  font-family: $font-main;
-  font-size: $font-size-tiny;
-  line-height: $line-height-default / 2;
-  margin-top: $line-height-default / 4;
-  padding-bottom: $line-height-default / 4;
-  color: $purple;
-  @include link-color($purple, $orange);
-  border-bottom: 1px dotted $purple;
-}
-
-.arrow {
-  @include font-size-xl();
-  color: $bg-accent;
-}
-
-ul.tags {
+// Modern Grid Layout Implementation
+body {
+  // Modern CSS custom properties
+  background-color: var(--color-bg);
+  color: var(--color-blue);
+  font-family: var(--font-family-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
   margin: 0;
-  padding: 2px 0 5px;
-  list-style: none;
-  text-align: left;
-  overflow: hidden;
-  //border-bottom: 1px dotted $purple;
-
-  li {
-    display: inline-block;
-    height: $line-height-default;
-    line-height: $line-height-default;
-  }
-
-  @include link-color($light-blue, $orange);
-
-  a {
-    position: relative;
-    text-indent: 0;
-    text-transform: uppercase;
-    font-family: $font-main;
-    @include font-size-tiny();
-    margin-left: 20px;
-    padding: 2px 10px 3px 10px;
-    background: $bg-accent;
-    text-decoration: none;
-    @include border-radius(0px 2px 2px 0px);
-
-    &:before {
-      content: "";
-      float: left;
-      position: absolute;
-      left: -10px;
-      top: 0;
-      width: 0;
-      height: 0;
-      border-color: transparent $bg-accent transparent transparent;
-      border-style: solid;
-      border-width: 10px 10px 10px 0;
+  border-top: var(--border-width) solid var(--color-purple);
+  
+  // Modern Container
+  .container {
+    border-bottom: var(--border-width) solid var(--color-purple);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    
+    @media (min-width: 768px) {
+      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-areas: 
+        "header header"
+        "sidebar main" 
+        "footer footer";
     }
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: 8px;
-      left: 0;
-      float: left;
-      width: 4px;
-      height: 4px;
-      background: $bg;
+    
+    @media (max-width: 767px) {
+      grid-template-areas:
+        "header"
+        "main"
+        "sidebar"
+        "footer";
     }
   }
-}
-
-//////////////////////////////
-// PHONE LAYOUT ADJUSTMENTS //
-//////////////////////////////
-
-@media #{$small-only} {
+  
+  // Header Area
   header#primary {
-    padding-bottom: 0;
-    @include text-center();
-
+    grid-area: header;
+    padding-block: var(--space-lg);
+    border-bottom: var(--border-width) solid var(--color-purple);
+    
     h1 {
-      @include font-size-medium(0.5, 0);
+      font-size: var(--font-size-xxl);
+      line-height: var(--line-height-tight);
+      margin-block: 0 var(--space-sm);
+      
+      a {
+        color: var(--color-strong-blue);
+        text-decoration: none;
+        
+        &:hover {
+          color: var(--color-orange);
+        }
+      }
     }
-
+    
     nav {
-      @include font-size-medium(0, 0.5);
-      @include text-center();
-
-      ul li {
-        padding-left: 0;
-        padding-right: 16px;
-        display: inline;
-
-        &:last-child {
-          padding-right: 0;
+      font-size: var(--font-size-xl);
+      text-align: right;
+      
+      @media (max-width: 767px) {
+        text-align: center;
+        font-size: var(--font-size-medium);
+      }
+      
+      ul {
+        display: flex;
+        gap: var(--space-md);
+        justify-content: flex-end;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        @media (max-width: 767px) {
+          justify-content: center;
+        }
+        
+        li a {
+          color: var(--color-strong-blue);
+          text-decoration: none;
+          
+          &:hover {
+            color: var(--color-orange);
+          }
+        }
+        
+        li.current a {
+          color: var(--color-orange-burnt);
+        }
+      }
+    }
+    
+    .highlight {
+      color: var(--color-orange-burnt);
+    }
+  }
+  
+  // Sidebar Area
+  #sidebar {
+    grid-area: sidebar;
+    padding: var(--space-lg);
+    
+    @media (max-width: 767px) {
+      padding: var(--space-md);
+      order: 3;
+    }
+    
+    section {
+      background-color: color-mix(in srgb, var(--color-bg) 93%, white 7%);
+      padding: var(--space-md);
+      border-radius: var(--border-radius-md);
+      margin-block-end: var(--space-lg);
+      text-align: center;
+      
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        
+        li:not(:last-child)::after {
+          content: "/";
+          margin-inline-start: var(--space-xs);
+          opacity: 0.6;
         }
       }
     }
   }
-
-  header#secondary {
-    h1 {
-      @include font-size-medium(0.5, 0.5);
+  
+  // Main Content Area
+  section#main {
+    grid-area: main;
+    padding: var(--space-lg);
+    
+    @media (max-width: 767px) {
+      padding: var(--space-md);
     }
   }
-
-  .post-info {
-    @include margin-calc($line-height-default, 0.5, 0.5, 0px, 0px);
-    padding-bottom: $line-height-default * 0.5;
-    border-bottom: 1px dotted $purple;
-    margin-bottom: 0;
-
-    .post-date,
-    .post-date div,
-    .attribution {
-      display: inline;
+  
+  // Footer Area  
+  footer {
+    grid-area: footer;
+    border-top: 3px dotted var(--color-purple);
+    padding-block: var(--space-lg);
+    text-align: center;
+    font-size: var(--font-size-small);
+    
+    p {
+      font-size: var(--font-size-tiny);
+      margin: 0;
     }
-
-    .attribution {
+  }
+  
+  // Article Styles with Modern CSS
+  article {
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--color-green);
+      font-family: var(--font-family-heading);
+    }
+    
+    h1 {
+      font-size: var(--font-size-large);
+      line-height: var(--line-height-tight);
+      margin-block: var(--space-lg) var(--space-md);
+    }
+    
+    h2 {
+      font-size: var(--font-size-medium);
+      line-height: var(--line-height-tight);
+      margin-block: var(--space-lg) var(--space-md);
+    }
+    
+    h3, h4, h5, h6 {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-tight);
+      margin-block: var(--space-lg) var(--space-md);
+    }
+    
+    p {
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+      margin-block: var(--space-md);
+    }
+    
+    // Links with modern color functions
+    a {
+      color: var(--color-green);
+      text-decoration-color: color-mix(in srgb, var(--color-green) 50%, transparent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      
+      &:hover {
+        color: var(--color-orange);
+        text-decoration-color: var(--color-orange);
+      }
+    }
+  }
+  
+  // Modern Code Blocks
+  pre, code {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-small);
+  }
+  
+  pre {
+    background: var(--color-bg-accent);
+    border-radius: var(--border-radius-md);
+    border-inline-start: var(--space-sm) solid var(--color-bg-accent);
+    padding: var(--space-md);
+    margin-block: var(--space-lg);
+    overflow-x: auto;
+    
+    // Modern scrollbars
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-blue) var(--color-bg-accent);
+    
+    &::-webkit-scrollbar {
+      height: 10px;
+      width: 10px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: var(--color-bg-accent);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-blue);
+      border-radius: var(--border-radius-md);
+    }
+  }
+  
+  code:not(pre code) {
+    background: var(--color-bg-accent);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9em;
+  }
+  
+  // Modern Table Styling
+  table:not(.codehilitetable) {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    margin-block: var(--space-lg);
+    
+    th, td {
+      padding: var(--space-md);
+      text-align: start;
+      border-bottom: 1px solid var(--color-bg-accent);
+    }
+    
+    th {
+      background: var(--color-bg-accent);
+      font-weight: 600;
+    }
+    
+    tr:last-child td {
       border-bottom: none;
     }
-
-    ul.tags {
-      display: none;
-    }
-
-    .post-date {
-      font-family: $font-heading;
-
-      .day {
-        font-size: $font-size-base;
-        line-height: $line-height-default;
-      }
-    }
-
-    .permalink a {
-      display: inline-block;
-      vertical-align: bottom;
-      margin-bottom: 3px;
-    }
   }
-
-  article {
-    header {
-      border-bottom: 1px dotted $purple;
-      margin-bottom: $line-height-default * 0.5;
-      h1 {
-        @include font-size-large(0.5, 0.5);
-        @include link-color($green, $orange);
-      }
-    }
-  }
-
-  .archives {
-    h2 {
-      @include font-size-medium(0.2, 0);
-    }
-
-    article:last-of-type {
-      border-bottom: 1px dotted $purple;
-    }
-
-    div.row:last-child {
-      article {
-        border: none;
-      }
+  
+  // Modern Blockquotes
+  blockquote {
+    border-inline-start: var(--border-width) solid var(--color-purple);
+    margin-inline: var(--space-lg);
+    padding-inline: var(--space-lg);
+    font-style: italic;
+    
+    p {
+      margin-block: var(--space-md);
     }
   }
 }
 
-///////////////////////////////
-// TABLET LAYOUT ADJUSTMENTS //
-///////////////////////////////
-//@media $medium-only {
-//    .post-info .post-date .day {
-//        font-size: 50px;
-//        line-height: 50px;
-//    }
-//}

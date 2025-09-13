@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-{{ `<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->` | safeHTML }}
-{{ `<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->` | safeHTML }}
-{{ `<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->` | safeHTML }}
-{{ `<!--[if gt IE 8]><!-->` | safeHTML }}
-<html class="no-js">
-{{ `<!--<![endif]-->` | safeHTML }}
+<html class="no-js" lang="{{ .Site.Language.Lang | default "en" }}">
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-  <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Color scheme support -->
+  <meta name="color-scheme" content="dark light">
+  
   <!-- Facebook meta tags -->
   <meta property="og:site_name" content="{{ .Site.Title }}" />
 
@@ -22,13 +18,12 @@
   {{ end }}
 
   {{ block "site-stylesheets" . }}
-    <!--<link rel="stylesheet" href="/_css/dark_rainbow.min.css" type="text/css" />-->
+    <!-- Modern CSS (no CDN dependencies) -->
     {{ $options := (dict "targetPath" "dark_rainbow.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "shared_assets")) }}
     {{ $style := resources.Get "sass/dark_rainbow.scss" | css.Sass $options | resources.Fingerprint "sha256" }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}" type="text/css" />
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.1/dist/components/sticky.min.css" type="text/css" />
   {{ end }}
+  
   {{ block "site-stylesheets-additional" . }}
       {{ partial "site-stylesheets-additional.html" . }}
   {{ end }}
@@ -41,66 +36,103 @@
   {{ end }}
 
   {{ template "_internal/google_analytics.html" . }}
-
   {{ hugo.Generator }}
 </head>
 
-<body class="" id="layout-body">
+<body>
   <div class="container">
-    {{ block "header" . }}{{ partial "site-header.html" . }}{{ end }}
+    {{ block "header" . }}
+      <header id="primary" role="banner">
+        <h1>
+          <a href="{{ "/" | relURL }}" rel="home">
+            {{ .Site.Title }}
+            {{ with .Site.Params.subtitle }}<span class="highlight">{{ . }}</span>{{ end }}
+          </a>
+        </h1>
+        
+        <nav role="navigation" aria-label="Main navigation">
+          <ul>
+            {{ range .Site.Menus.main }}
+              <li{{ if .HasChildren }} class="dropdown"{{ end }}>
+                <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="current" aria-current="page"{{ end }}>
+                  {{ .Name }}
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </nav>
+      </header>
+    {{ end }}
+    
     {{ block "subheader" . }}{{ end }}
 
-    {{ block "main" . }}
-      <div class="row">
-        {{ partial "_sidebar-date.html" . }}
-
-        {{ partial "_list_content.html" . }}
-      </div>
+    <!-- Sidebar -->
+    {{ if .Site.Params.sidebar }}
+    <aside id="sidebar" role="complementary">
+      {{ block "sidebar" . }}
+        {{ partial "site-sidebar.html" . }}
+      {{ end }}
+    </aside>
     {{ end }}
 
-    {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
+    <!-- Main content -->
+    <section id="main" role="main">
+      {{ block "main" . }}
+        <div class="content">
+          {{ .Content }}
+        </div>
+      {{ end }}
+    </section>
+
+    <!-- Footer -->
+    {{ block "footer" . }}
+      <footer role="contentinfo">
+        {{ partial "site-footer.html" . }}
+      </footer>
+    {{ end }}
   </div>
 
-  {{ block "site-scripts-bottom" . }}{{ partial "site-scripts-bottom.html" . }}{{ end }}
-  {{ block "site-scripts-bottom-additional" . }}{{ partial "site-scripts-bottom-additional.html" . }}{{ end }}
-
-  <!-- Layout toggle functionality for testing modern layout -->
+  <!-- Modern JavaScript (no jQuery dependency) -->
   <script>
-    // Check for layout=modern URL parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('layout') === 'modern') {
-      // Remove no-js and add supports-grid for feature detection
-      document.documentElement.classList.remove('no-js');
-      
-      if (CSS.supports('display', 'grid')) {
-        document.documentElement.classList.add('supports-grid');
-        document.documentElement.classList.remove('no-grid');
-      } else {
-        document.documentElement.classList.add('no-grid');
-        document.documentElement.classList.remove('supports-grid');
-      }
-      
-      // Apply modern layout styles
-      document.body.classList.add('modern-layout');
-      document.body.classList.remove('classic-layout');
-      
-      // Replace foundation CSS with modern CSS
-      {{ $modernOptions := (dict "targetPath" "dark_rainbow_modern.css" "outputStyle" "compressed" "enableSourceMap" true "includePaths" (slice "shared_assets")) }}
-      {{ $modernStyle := resources.Get "sass/dark_rainbow_modern.scss" | css.Sass $modernOptions | resources.Fingerprint "sha256" }}
-      
-      // Remove existing foundation CSS
-      const existingCSS = document.querySelector('link[href*="dark_rainbow"]');
-      const semanticCSS = document.querySelector('link[href*="semantic-ui"]');
-      if (existingCSS) existingCSS.remove();
-      if (semanticCSS) semanticCSS.remove();
-      
-      // Add modern CSS
-      const modernCSS = document.createElement('link');
-      modernCSS.rel = 'stylesheet';
-      modernCSS.href = '{{ $modernStyle.RelPermalink }}';
-      document.head.appendChild(modernCSS);
+    // Feature detection for CSS Grid
+    document.documentElement.classList.remove('no-js');
+    
+    if (CSS.supports('display', 'grid')) {
+      document.documentElement.classList.add('supports-grid');
+      document.documentElement.classList.remove('no-grid');
+    } else {
+      document.documentElement.classList.add('no-grid');
+      document.documentElement.classList.remove('supports-grid');
     }
+    
+    // Smooth scrolling for anchor links
+    document.addEventListener('DOMContentLoaded', function() {
+      const links = document.querySelectorAll('a[href^="#"]');
+      
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          const target = document.querySelector(targetId);
+          
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
   </script>
-</body>
 
+  <!-- Modern footnotes with Littlefoot.js -->
+  {{ partial "_footnotes.html" . }}
+
+  <!-- Simple modern scripts (no jQuery/CDN dependencies) -->
+  {{ partial "_simple-scripts.html" . }}
+
+  <!-- Fallback for custom scripts if needed -->
+  {{ block "site-scripts-bottom-additional" . }}{{ end }}
+</body>
 </html>
