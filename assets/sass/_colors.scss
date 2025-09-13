@@ -29,3 +29,48 @@ $red: #e52222;
 $red-bright: #c00;
 $teal: #67d9f0;
 $grey: #586e75;
+
+// CSS Custom Properties for modern CSS Grid layout
+:root {
+  // Colors
+  --color-bg: #{$bg};
+  --color-bg-accent: #{$bg-accent};
+  --color-blue: #{$blue};
+  --color-strong-blue: #{$strong-blue};
+  --color-orange: #{$orange};
+  --color-orange-burnt: #{$orange-burnt};
+  --color-purple: #{$purple};
+  --color-green: #{$green};
+  
+  // Typography
+  --font-family-main: 'proxima-nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-heading: 'proxima-nova-condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+  
+  // Font sizes
+  --font-size-tiny: 0.75rem;
+  --font-size-small: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-medium: 1.125rem;
+  --font-size-large: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+  
+  // Line heights
+  --line-height-base: 1.6;
+  --line-height-tight: 1.2;
+  --line-height-relaxed: 1.8;
+  
+  // Spacing
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  
+  // Layout
+  --sidebar-width: 240px;
+  --border-width: 3px;
+  --border-radius-sm: 3px;
+  --border-radius-md: 6px;
+}

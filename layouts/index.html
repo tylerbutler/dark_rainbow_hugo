@@ -2,38 +2,31 @@
 <div class="posts h-feed">
   {{ range .Paginator.Pages }}
     {{ .Scratch.Set "renderContext" "home" }}
-    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-      <header>
-        <h1 class="p-name" itemprop="headline">
-          <a href="{{ .RelPermalink }}" class="u-url" itemprop="url">{{ .Title }}</a>
-        </h1>
-        
-        <div class="post-meta">
-          <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">
-            {{ .Date.Format "January 2, 2006" }}
-          </time>
-          
-          {{ with .Params.tags }}
-          <ul class="tags p-category" itemprop="keywords">
-            {{ range . }}
-            <li><a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">#{{ . }}</a></li>
-            {{ end }}
-          </ul>
-          {{ end }}
-        </div>
-      </header>
-      
-      <div class="post-content e-content" itemprop="articleBody">
+    <div class="h-entry row">
+      {{ partial "post-info" . }}
+      <article class="post-content medium-9 large-10 columns" itemscope itemtype="http://schema.org/BlogPosting">
+        <time class="dt-published" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished"></time>
+        {{ partial "post-author" . }}
+        <header>
+          <h1>
+            {{ $link := (.Params.link) }}
+            <a class="p-name u-url" href="{{ if $link }}{{ $link }}{{ else }}{{ .RelPermalink }}{{ end }}" itemprop="url">{{ .Title }}</a> {{ if $link }}<span class="arrow">→</span>{{ end }}
+          </h1>
+        </header>
         {{ if .Summary }}
-          {{ .Summary }}
-          {{ if .Truncated }}
-            <p><a href="{{ .RelPermalink }}" class="read-more">Read more →</a></p>
-          {{ end }}
+          <div class="p-summary e-content" itemprop="articleBody">
+            {{ .Summary }}
+            {{ if .Truncated }}
+              <a href="{{ .Permalink }}" class="read-more">Read more →</a>
+            {{ end }}
+          </div>
         {{ else }}
-          {{ .Content }}
+          <div class="e-content" itemprop="articleBody">
+            {{ .Content }}
+          </div>
         {{ end }}
-      </div>
-    </article>
+      </article>
+    </div>
   {{ end }}
   
   <!-- Pagination -->

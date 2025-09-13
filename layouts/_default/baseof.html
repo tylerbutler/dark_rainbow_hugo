@@ -39,50 +39,55 @@
   {{ hugo.Generator }}
 </head>
 
-<body>
+<body class="modern-layout">
   <div class="container">
     {{ block "header" . }}
       <header id="primary" role="banner">
-        <h1>
-          <a href="{{ "/" | relURL }}" rel="home">
-            {{ .Site.Title }}
-            {{ with .Site.Params.subtitle }}<span class="highlight">{{ . }}</span>{{ end }}
-          </a>
-        </h1>
-        
-        <nav role="navigation" aria-label="Main navigation">
-          <ul>
-            {{ range .Site.Menus.main }}
-              <li{{ if .HasChildren }} class="dropdown"{{ end }}>
-                <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="current" aria-current="page"{{ end }}>
-                  {{ .Name }}
-                </a>
-              </li>
-            {{ end }}
-          </ul>
-        </nav>
+        <div class="row">
+          <div class="small-12 columns">
+            <h1>
+              <a href="{{ "/" | relURL }}" rel="home">
+                {{ .Site.Title }}
+                {{ with .Site.Params.subtitle }}<span class="highlight">{{ . }}</span>{{ end }}
+              </a>
+            </h1>
+            
+            <nav role="navigation" aria-label="Main navigation">
+              <ul>
+                {{ range .Site.Menus.main }}
+                  <li{{ if .HasChildren }} class="dropdown"{{ end }}>
+                    <a href="{{ .URL }}"{{ if eq $.RelPermalink .URL }} class="current" aria-current="page"{{ end }}>
+                      {{ .Name }}
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            </nav>
+          </div>
+        </div>
       </header>
     {{ end }}
     
     {{ block "subheader" . }}{{ end }}
 
-    <!-- Sidebar -->
-    {{ if .Site.Params.sidebar }}
-    <aside id="sidebar" role="complementary">
-      {{ block "sidebar" . }}
-        {{ partial "site-sidebar.html" . }}
-      {{ end }}
-    </aside>
-    {{ end }}
+    <!-- Foundation-compatible row structure -->
+    <div class="row">
+      <!-- Main content with Foundation grid classes -->
+      <section id="main" class="medium-8 medium-pull-4 large-9 large-pull-3 columns" role="main">
+        {{ block "main" . }}
+          <div class="content">
+            {{ .Content }}
+          </div>
+        {{ end }}
+      </section>
 
-    <!-- Main content -->
-    <section id="main" role="main">
-      {{ block "main" . }}
-        <div class="content">
-          {{ .Content }}
-        </div>
+      <!-- Sidebar rendered with Foundation grid classes via partial -->
+      {{ if .Site.Params.sidebar }}
+        {{ block "sidebar" . }}
+          {{ partial "site-sidebar.html" . }}
+        {{ end }}
       {{ end }}
-    </section>
+    </div>
 
     <!-- Footer -->
     {{ block "footer" . }}

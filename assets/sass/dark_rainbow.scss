@@ -1,7 +1,10 @@
 // Modern CSS Implementation
-// Cleaned up version with CSS Grid layout and no external dependencies
+// Visual match to Foundation layout with modern CSS implementation
 
-// Modern CSS - no Foundation imports needed
+// Import Foundation-compatible layout
+@import "visual-match-foundation";
+
+// Base theme styles
 @import "../_shared/sass/baseline";
 @import "mixins";
 @import "colors";
@@ -9,24 +12,11 @@
 @import "../_shared/code_styles/_solarized.scss";
 @import "../_shared/sass/twitter";
 
-// Feature Detection Support
-.supports-grid {
-  display: none;
-}
+// Foundation-compatible layout uses flexbox implementation
+// All layout styles are now in visual-match-foundation.scss
 
-@supports (display: grid) {
-  .supports-grid {
-    display: block;
-  }
-  
-  .no-grid {
-    display: none;
-  }
-}
-
-// Modern Grid Layout Implementation
+// Base body styles only (layout handled by Foundation-compatible grid)
 body {
-  // Modern CSS custom properties
   background-color: var(--color-bg);
   color: var(--color-blue);
   font-family: var(--font-family-main);
@@ -35,43 +25,166 @@ body {
   margin: 0;
   border-top: var(--border-width) solid var(--color-purple);
   
-  // Modern Container
   .container {
     border-bottom: var(--border-width) solid var(--color-purple);
     min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    
-    @media (min-width: 768px) {
-      grid-template-columns: var(--sidebar-width) 1fr;
-      grid-template-areas: 
-        "header header"
-        "sidebar main" 
-        "footer footer";
-    }
-    
-    @media (max-width: 767px) {
-      grid-template-areas:
-        "header"
-        "main"
-        "sidebar"
-        "footer";
-    }
+  }
+}
+
+// Article Styles with Modern CSS
+article {
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-green);
+    font-family: var(--font-family-heading);
   }
   
-  // Header Area
-  header#primary {
-    grid-area: header;
-    padding-block: var(--space-lg);
-    border-bottom: var(--border-width) solid var(--color-purple);
+  h1 {
+    font-size: var(--font-size-large);
+    line-height: var(--line-height-tight);
+    margin-block: var(--space-lg) var(--space-md);
+  }
+  
+  h2 {
+    font-size: var(--font-size-medium);
+    line-height: var(--line-height-tight);
+    margin-block: var(--space-lg) var(--space-md);
+  }
+  
+  h3, h4, h5, h6 {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-tight);
+    margin-block: var(--space-lg) var(--space-md);
+  }
+  
+  p {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    margin-block: var(--space-md);
+  }
+  
+  // Links with modern color functions
+  a {
+    color: var(--color-green);
+    text-decoration-color: color-mix(in srgb, var(--color-green) 50%, transparent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
     
-    h1 {
-      font-size: var(--font-size-xxl);
-      line-height: var(--line-height-tight);
-      margin-block: 0 var(--space-sm);
-      
+    &:hover {
+      color: var(--color-orange);
+      text-decoration-color: var(--color-orange);
+    }
+  }
+}
+
+// Modern Code Blocks
+pre, code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-small);
+}
+
+pre {
+  background: var(--color-bg-accent);
+  border-radius: var(--border-radius-md);
+  border-inline-start: var(--space-sm) solid var(--color-bg-accent);
+  padding: var(--space-md);
+  margin-block: var(--space-lg);
+  overflow-x: auto;
+  
+  // Modern scrollbars
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blue) var(--color-bg-accent);
+  
+  &::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--color-bg-accent);
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-blue);
+    border-radius: var(--border-radius-md);
+  }
+}
+
+code:not(pre code) {
+  background: var(--color-bg-accent);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9em;
+}
+
+// Modern Table Styling
+table:not(.codehilitetable) {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  margin-block: var(--space-lg);
+  
+  th, td {
+    padding: var(--space-md);
+    text-align: start;
+    border-bottom: 1px solid var(--color-bg-accent);
+  }
+  
+  th {
+    background: var(--color-bg-accent);
+    font-weight: 600;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// Modern Blockquotes
+blockquote {
+  border-inline-start: var(--border-width) solid var(--color-purple);
+  margin-inline: var(--space-lg);
+  padding-inline: var(--space-lg);
+  font-style: italic;
+  
+  p {
+    margin-block: var(--space-md);
+  }
+}
+
+// Large Date Blocks for Articles
+.post-info {
+  .post-date {
+    text-align: center;
+    color: var(--color-blue);
+    font-family: var(--font-family-heading);
+    margin-block-end: var(--space-lg);
+    
+    .month {
+      font-size: var(--font-size-small);
+      font-weight: 600;
+      color: var(--color-orange);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .day {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-strong-blue);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .year {
+      font-size: var(--font-size-small);
+      color: var(--color-blue);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .permalink {
       a {
-        color: var(--color-strong-blue);
+        font-size: var(--font-size-large);
+        color: var(--color-purple);
         text-decoration: none;
         
         &:hover {
@@ -79,226 +192,42 @@ body {
         }
       }
     }
-    
-    nav {
-      font-size: var(--font-size-xl);
-      text-align: right;
-      
-      @media (max-width: 767px) {
-        text-align: center;
-        font-size: var(--font-size-medium);
-      }
-      
-      ul {
-        display: flex;
-        gap: var(--space-md);
-        justify-content: flex-end;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        
-        @media (max-width: 767px) {
-          justify-content: center;
-        }
-        
-        li a {
-          color: var(--color-strong-blue);
-          text-decoration: none;
-          
-          &:hover {
-            color: var(--color-orange);
-          }
-        }
-        
-        li.current a {
-          color: var(--color-orange-burnt);
-        }
-      }
-    }
-    
-    .highlight {
-      color: var(--color-orange-burnt);
-    }
   }
   
-  // Sidebar Area
-  #sidebar {
-    grid-area: sidebar;
-    padding: var(--space-lg);
+  .tags {
+    list-style: none;
+    margin: var(--space-md) 0;
+    padding: 0;
     
-    @media (max-width: 767px) {
-      padding: var(--space-md);
-      order: 3;
-    }
-    
-    section {
-      background-color: color-mix(in srgb, var(--color-bg) 93%, white 7%);
-      padding: var(--space-md);
-      border-radius: var(--border-radius-md);
-      margin-block-end: var(--space-lg);
-      text-align: center;
+    li {
+      display: inline-block;
+      margin-right: var(--space-sm);
       
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-xs);
-        justify-content: center;
-        list-style: none;
-        margin: 0;
-        padding: 0;
+      &:not(:last-child)::after {
+        content: "";
+      }
+      
+      a {
+        font-size: var(--font-size-small);
+        color: var(--color-purple);
+        text-decoration: none;
         
-        li:not(:last-child)::after {
-          content: "/";
-          margin-inline-start: var(--space-xs);
-          opacity: 0.6;
+        &:hover {
+          color: var(--color-orange);
         }
       }
     }
   }
+}
+
+// Article Layout with Date Blocks
+.h-entry.row {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--color-bg-accent);
+  padding-bottom: var(--space-lg);
   
-  // Main Content Area
-  section#main {
-    grid-area: main;
-    padding: var(--space-lg);
-    
-    @media (max-width: 767px) {
-      padding: var(--space-md);
-    }
-  }
-  
-  // Footer Area  
-  footer {
-    grid-area: footer;
-    border-top: 3px dotted var(--color-purple);
-    padding-block: var(--space-lg);
-    text-align: center;
-    font-size: var(--font-size-small);
-    
-    p {
-      font-size: var(--font-size-tiny);
-      margin: 0;
-    }
-  }
-  
-  // Article Styles with Modern CSS
-  article {
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--color-green);
-      font-family: var(--font-family-heading);
-    }
-    
-    h1 {
-      font-size: var(--font-size-large);
-      line-height: var(--line-height-tight);
-      margin-block: var(--space-lg) var(--space-md);
-    }
-    
-    h2 {
-      font-size: var(--font-size-medium);
-      line-height: var(--line-height-tight);
-      margin-block: var(--space-lg) var(--space-md);
-    }
-    
-    h3, h4, h5, h6 {
-      font-size: var(--font-size-base);
-      line-height: var(--line-height-tight);
-      margin-block: var(--space-lg) var(--space-md);
-    }
-    
-    p {
-      font-size: var(--font-size-base);
-      line-height: var(--line-height-relaxed);
-      margin-block: var(--space-md);
-    }
-    
-    // Links with modern color functions
-    a {
-      color: var(--color-green);
-      text-decoration-color: color-mix(in srgb, var(--color-green) 50%, transparent);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-      
-      &:hover {
-        color: var(--color-orange);
-        text-decoration-color: var(--color-orange);
-      }
-    }
-  }
-  
-  // Modern Code Blocks
-  pre, code {
-    font-family: var(--font-family-mono);
-    font-size: var(--font-size-small);
-  }
-  
-  pre {
-    background: var(--color-bg-accent);
-    border-radius: var(--border-radius-md);
-    border-inline-start: var(--space-sm) solid var(--color-bg-accent);
-    padding: var(--space-md);
-    margin-block: var(--space-lg);
-    overflow-x: auto;
-    
-    // Modern scrollbars
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-blue) var(--color-bg-accent);
-    
-    &::-webkit-scrollbar {
-      height: 10px;
-      width: 10px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: var(--color-bg-accent);
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: var(--color-blue);
-      border-radius: var(--border-radius-md);
-    }
-  }
-  
-  code:not(pre code) {
-    background: var(--color-bg-accent);
-    padding: var(--space-xs) var(--space-sm);
-    border-radius: var(--border-radius-sm);
-    font-size: 0.9em;
-  }
-  
-  // Modern Table Styling
-  table:not(.codehilitetable) {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: var(--border-radius-md);
-    overflow: hidden;
-    margin-block: var(--space-lg);
-    
-    th, td {
-      padding: var(--space-md);
-      text-align: start;
-      border-bottom: 1px solid var(--color-bg-accent);
-    }
-    
-    th {
-      background: var(--color-bg-accent);
-      font-weight: 600;
-    }
-    
-    tr:last-child td {
-      border-bottom: none;
-    }
-  }
-  
-  // Modern Blockquotes
-  blockquote {
-    border-inline-start: var(--border-width) solid var(--color-purple);
-    margin-inline: var(--space-lg);
-    padding-inline: var(--space-lg);
-    font-style: italic;
-    
-    p {
-      margin-block: var(--space-md);
-    }
+  &:last-child {
+    border-bottom: none;
   }
 }
 

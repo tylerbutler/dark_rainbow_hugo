@@ -50,10 +50,11 @@ body.modern-layout body {
   border-top: 5px solid #7750cb !important;
 }
 
-/* Header/navigation proper spacing - reduced */
+/* Header/navigation proper spacing - matches original layout height */
 body.modern-layout header#primary {
-  padding-top: 1rem !important;
-  padding-bottom: 1rem !important;
+  padding-top: 3.8rem !important;
+  padding-bottom: 3.8rem !important;
+  border-bottom: 5px solid #7750cb !important;
 }
 
 body.modern-layout header#primary h1 {
@@ -77,6 +78,48 @@ body.modern-layout header#primary nav ul {
 
 body.modern-layout header#primary nav ul li {
   margin-left: 1.5rem !important;
+}
+
+/* Header row structure */
+body.modern-layout header#primary .row {
+  max-width: 75rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0.9375rem !important;
+  padding-right: 0.9375rem !important;
+}
+
+/* Header column structure */
+body.modern-layout header#primary .columns {
+  padding-left: 0.9375rem !important;
+  padding-right: 0.9375rem !important;
+  width: 100% !important;
+}
+
+/* Typography improvements for visual match */
+body.modern-layout header#primary h1 a {
+  color: #007cef !important; /* $strong-blue */
+  text-decoration: none !important;
+  font-size: 2.5rem !important;
+}
+
+body.modern-layout header#primary h1 a .highlight {
+  color: #d24727 !important; /* $orange-burnt */
+}
+
+body.modern-layout header#primary nav {
+  margin-top: 0.5rem !important;
+}
+
+body.modern-layout header#primary nav ul li a {
+  color: #007cef !important; /* $strong-blue */
+  text-decoration: none !important;
+  font-size: 1.25rem !important;
+}
+
+body.modern-layout header#primary nav ul li.current a,
+body.modern-layout header#primary nav ul li a:hover {
+  color: #ffc53b !important; /* $orange */
 }
 
 /* Container system - matches Foundation's visual behavior with high specificity */
