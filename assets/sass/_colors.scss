@@ -42,10 +42,10 @@ $grey: #586e75;
   --color-purple: #{$purple};
   --color-green: #{$green};
   
-  // Typography
-  --font-family-main: 'proxima-nova', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-heading: 'proxima-nova-condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-family-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+  // Typography - Match live site fonts
+  --font-family-main: 'myriad-pro', 'Myriad Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family-heading: 'museo-slab', 'Museo Slab', Georgia, serif;
+  --font-family-mono: 'ubuntu-mono', 'Ubuntu Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
   
   // Font sizes
   --font-size-tiny: 0.75rem;
